@@ -61,16 +61,19 @@ namespace our {
         // Waleed
         void set(const std::string &uniform, glm::vec2 value) {
             //TODO: (Req 1) Send the given 2D vector value to the given uniform
+            glUniform2f(getUniformLocation(uniform),value.x,value.y);
         }
 
         // Waleed
         void set(const std::string &uniform, glm::vec3 value) {
             //TODO: (Req 1) Send the given 3D vector value to the given uniform
+            glUniform3f(getUniformLocation(uniform),value.x,value.y,value.z);
         }
 
         // Waleed
         void set(const std::string &uniform, glm::vec4 value) {
             //TODO: (Req 1) Send the given 4D vector value to the given uniform
+            glUniform4f(getUniformLocation(uniform),value.x,value.y,value.z,value.w);
         }
 
         // Zaki
