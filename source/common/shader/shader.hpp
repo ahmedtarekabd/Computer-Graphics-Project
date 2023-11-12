@@ -20,10 +20,12 @@ namespace our {
         ShaderProgram(){
             //TODO: (Req 1) Create A shader program
             GLuint program = glCreateProgram();
+
         }
         // Tarek
         ~ShaderProgram(){
             //TODO: (Req 1) Delete a shader program
+            glDeleteProgram(program);
         }
 
         // Tarek
@@ -59,6 +61,7 @@ namespace our {
         // Waleed
         void set(const std::string &uniform, glm::vec2 value) {
             //TODO: (Req 1) Send the given 2D vector value to the given uniform
+            
         }
 
         // Waleed
