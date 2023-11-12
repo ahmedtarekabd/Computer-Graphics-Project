@@ -42,7 +42,7 @@ namespace our
             glUseProgram(program);
         }
 
-        // Zaki
+        // Zakiiiiiiiiiiiiiiii
         GLuint getUniformLocation(const std::string &name)
         {
             // TODO: (Req 1) Return the location of the uniform with the given name
@@ -50,21 +50,24 @@ namespace our
         }
 
         // Osama
-        void set(const std::string &uniform, GLfloat value) {
-            //TODO: (Req 1) Send the given float value to the given uniform
+        void set(const std::string &uniform, GLfloat value)
+        {
+            // TODO: (Req 1) Send the given float value to the given uniform
             glUniform1f(getUniformLocation(uniform), value);
         }
 
         // Osama
-        void set(const std::string &uniform, GLuint value) {
-            //TODO: (Req 1) Send the given unsigned integer value to the given uniform
+        void set(const std::string &uniform, GLuint value)
+        {
+            // TODO: (Req 1) Send the given unsigned integer value to the given uniform
             glUniform1ui(getUniformLocation(uniform), value);
         }
 
         // Osama
-        void set(const std::string &uniform, GLint value) {
-            //TODO: (Req 1) Send the given integer value to the given uniform
-            glUniform1i(getUniformLocation(uniform) , value);
+        void set(const std::string &uniform, GLint value)
+        {
+            // TODO: (Req 1) Send the given integer value to the given uniform
+            glUniform1i(getUniformLocation(uniform), value);
         }
 
         // Waleed
