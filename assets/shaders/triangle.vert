@@ -14,6 +14,9 @@ out Varyings {
 // Each vertex "v" should be transformed to be "scale * v + translation".
 // The default value for "translation" is (0.0, 0.0) and for "scale" is (1.0, 1.0).
 
+uniform vec2 translation = vec2(0.0, 0.0);
+uniform vec2 scale = vec2(1.0, 1.0);
+
 //TODO: (Req 1) Finish this shader
 
 void main() {
@@ -30,6 +33,7 @@ void main() {
         vec3(0.0, 0.0, 1.0)
     );
 
-    gl_Position = vec4(positions[gl_VertexID], 1.0);
+    vec3 position = vec3(positions[gl_VertexID].xy * scale + translation, positions[gl_VertexID].z);
+    gl_Position = vec4(position, 1.0);
     vs_out.color = color[gl_VertexID];
 }
