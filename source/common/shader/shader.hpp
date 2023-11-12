@@ -22,7 +22,7 @@ namespace our
         ShaderProgram()
         {
             // TODO: (Req 1) Create A shader program
-            GLuint program = glCreateProgram();
+            program = glCreateProgram();
         }
         // Tarek
         ~ShaderProgram()
