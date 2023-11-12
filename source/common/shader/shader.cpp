@@ -29,7 +29,7 @@ bool our::ShaderProgram::attach(const std::string &filename, GLenum type) const 
     // Create shader pointer
     GLuint shader = glCreateShader(type);
     // Get shader file as string
-    glShaderSource(shader, &sourceCStr, nullptr);
+    glShaderSource(shader, 1, &sourceCStr, nullptr);
     glCompileShader(shader);
 
     // Check for errors during compilation
@@ -62,7 +62,9 @@ bool our::ShaderProgram::link() const {
 
     glLinkProgram(program);
 
-    if (checkForLinkingErrors(program) != "")
+    std::string error = checkForLinkingErrors(program);
+
+    if (error != "")
     {
 
         std::cout << error << std::endl;

@@ -61,7 +61,6 @@ namespace our {
         // Waleed
         void set(const std::string &uniform, glm::vec2 value) {
             //TODO: (Req 1) Send the given 2D vector value to the given uniform
-            
         }
 
         // Waleed
