@@ -31,7 +31,7 @@ namespace our
             glDeleteProgram(program);
         }
 
-        // Tarek
+        // Tarekkkkkkkkkkkkkkkkkkkkkkkk
         bool attach(const std::string &filename, GLenum type) const;
 
         // Tarek
