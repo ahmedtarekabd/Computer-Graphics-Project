@@ -49,7 +49,7 @@ namespace our
             return glGetUniformLocation(program, name.c_str());
         }
 
-        // Osamaaaaaaaaaaaaaa
+        // Osama
         void set(const std::string &uniform, GLfloat value)
         {
             // TODO: (Req 1) Send the given float value to the given uniform
