@@ -2,6 +2,7 @@
 
 #include <glad/gl.h>
 #include "vertex.hpp"
+#include <iostream>
 
 namespace our
 {
@@ -44,11 +45,11 @@ namespace our
             // Targeting VBO -> Will be added to the VAO
             glBindBuffer(GL_ARRAY_BUFFER, VBO);
             // Load data to VBO (currently binded buffer)
-            glBufferData(GL_ARRAY_BUFFER,                  // Use targeted buffer (VBO)
-                         vertices.size() * sizeof(Vertex), // Size of buffer
-                         &vertices,                        // Data
-                         GL_STATIC_DRAW);                  // Copied to vram as soon as possible and left there,
-                                                           // Source: https://computergraphics.stackexchange.com/questions/5712/gl-static-draw-vs-gl-dynamic-draw-vs-gl-stream-draw-does-it-matter
+            glBufferData(GL_ARRAY_BUFFER,                   // Use targeted buffer (VBO)
+                         vertices.size() * sizeof(Vertex),  // Size of buffer
+                         &vertices.front(),                 // Data: Send the address of the first element, NOT THE OBJECT ADDRESS!
+                         GL_STATIC_DRAW);                   // Copied to vram as soon as possible and left there,
+                                                            // Source: https://computergraphics.stackexchange.com/questions/5712/gl-static-draw-vs-gl-dynamic-draw-vs-gl-stream-draw-does-it-matter
 
             // 3. Create Element Buffer
             glGenBuffers(1, &EBO);
@@ -57,7 +58,7 @@ namespace our
             // Load data to VBO (currently binded buffer)
             glBufferData(GL_ELEMENT_ARRAY_BUFFER,
                          elements.size() * sizeof(unsigned int),
-                         &elements,
+                         &elements.front(),
                          GL_STATIC_DRAW);
             // Save # of elements
             elementCount = elements.size();
@@ -83,6 +84,8 @@ namespace our
             // Specify: Shader location, Number of normal strides, Data type, Don't normalize, Vertex offset, Normal offset from start
             glVertexAttribPointer(ATTRIB_LOC_NORMAL, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, normal));
 
+            glBindVertexArray(0);
+
         }
 
         // this function should render the mesh
@@ -93,8 +96,8 @@ namespace our
             glBindVertexArray(VAO);
 
             // Draw using indices provided in the EBO currently bound
-            // Primitive type, Number of indicies, Data type of indicies, EBO offset (We use it so we pass 0)
-            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void *)0);
+            // Primitive type, Number of indicies, Data type of indicies, EBO offset (We use it so we pass 0 to start from the begining of the first buffer)
+            glDrawElements(GL_TRIANGLES, elementCount, GL_UNSIGNED_INT, (void *)0);
 
             // Unbind VAO from Current vertex array state
             // Source: https://www.reddit.com/r/opengl/comments/f3sclv/why_some_tutorials_put_glbindvertexarray0_after/
