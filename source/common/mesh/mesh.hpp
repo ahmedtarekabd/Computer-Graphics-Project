@@ -45,11 +45,11 @@ namespace our
             // Targeting VBO -> Will be added to the VAO
             glBindBuffer(GL_ARRAY_BUFFER, VBO);
             // Load data to VBO (currently binded buffer)
-            glBufferData(GL_ARRAY_BUFFER,                   // Use targeted buffer (VBO)
-                         vertices.size() * sizeof(Vertex),  // Size of buffer
-                         &vertices.front(),                 // Data: Send the address of the first element, NOT THE OBJECT ADDRESS!
-                         GL_STATIC_DRAW);                   // Copied to vram as soon as possible and left there,
-                                                            // Source: https://computergraphics.stackexchange.com/questions/5712/gl-static-draw-vs-gl-dynamic-draw-vs-gl-stream-draw-does-it-matter
+            glBufferData(GL_ARRAY_BUFFER,                  // Use targeted buffer (VBO)
+                         vertices.size() * sizeof(Vertex), // Size of buffer
+                         &vertices.front(),                // Data: Send the address of the first element, NOT THE OBJECT ADDRESS!
+                         GL_STATIC_DRAW);                  // Copied to vram as soon as possible and left there,
+                                                           // Source: https://computergraphics.stackexchange.com/questions/5712/gl-static-draw-vs-gl-dynamic-draw-vs-gl-stream-draw-does-it-matter
 
             // 3. Create Element Buffer
             glGenBuffers(1, &EBO);
@@ -61,31 +61,30 @@ namespace our
                          &elements.front(),
                          GL_STATIC_DRAW);
             // Save # of elements
-            elementCount = elements.size();
+            elementCount = static_cast<GLsizei>(elements.size());
 
             // 4. Config VAO: Attributes pointers
             // Position attribute
             glEnableVertexAttribArray(ATTRIB_LOC_POSITION);
             // Specify: Shader location, Number of position strides, Data type, Don't normalize, Vertex offset, Position offset from start
-            glVertexAttribPointer(ATTRIB_LOC_POSITION, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
-            
+            glVertexAttribPointer(ATTRIB_LOC_POSITION, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)offsetof(Vertex, position));
+
             // Color attribute
             glEnableVertexAttribArray(ATTRIB_LOC_COLOR);
             // Specify: Shader location, Number of color strides, Data type, Normalize, Vertex offset, Color offset from start
-            glVertexAttribPointer(ATTRIB_LOC_COLOR, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void*)offsetof(Vertex, color));
+            glVertexAttribPointer(ATTRIB_LOC_COLOR, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void *)offsetof(Vertex, color));
 
             // Texture Coordinates Attributes
             glEnableVertexAttribArray(ATTRIB_LOC_TEXCOORD);
             // Specify: Shader location, Number of texture strides, Data type, Don't normalize, Vertex offset, Texture offset from start
-            glVertexAttribPointer(ATTRIB_LOC_TEXCOORD, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, tex_coord));
+            glVertexAttribPointer(ATTRIB_LOC_TEXCOORD, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)offsetof(Vertex, tex_coord));
 
             // Normal
             glEnableVertexAttribArray(ATTRIB_LOC_NORMAL);
             // Specify: Shader location, Number of normal strides, Data type, Don't normalize, Vertex offset, Normal offset from start
-            glVertexAttribPointer(ATTRIB_LOC_NORMAL, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, normal));
+            glVertexAttribPointer(ATTRIB_LOC_NORMAL, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)offsetof(Vertex, normal));
 
             glBindVertexArray(0);
-
         }
 
         // this function should render the mesh
@@ -102,7 +101,6 @@ namespace our
             // Unbind VAO from Current vertex array state
             // Source: https://www.reddit.com/r/opengl/comments/f3sclv/why_some_tutorials_put_glbindvertexarray0_after/
             glBindVertexArray(0);
-
         }
 
         // this function should delete the vertex & element buffers and the vertex array object
@@ -119,7 +117,6 @@ namespace our
             VAO = 0;
             VBO = 0;
             EBO = 0;
-
         }
 
         Mesh(Mesh const &) = delete;
