@@ -34,7 +34,40 @@ our::Texture2D* our::texture_utils::loadImage(const std::string& filename, bool 
     // Create a texture
     our::Texture2D* texture = new our::Texture2D();
     //Bind the texture such that we upload the image data to its storage
+    texture->bind();
     //TODO: (Req 5) Finish this function to fill the texture with the data found in "pixels"
+
+    /*
+    sets the pixel storage modes for pixel transfer operations
+    telling OpenGL that each row of pixel data in memory is tightly packed with no additional padding
+    */
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+    
+    /**  to be editeddd  0: Keep number of channels the same as in the image file  */
+    
+    //GLenum target, GLint level, GLint internalFormat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const GLvoid * data
+    /*
+       GL_RG:  suitable for grayscale and alpha data 
+       GL_RED: suitable for grayscale data.
+       GL_RGB: suitable for RGB
+    */
+    switch(channels){
+        case 1:
+           glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, size.x, size.y, 0, GL_RED, GL_UNSIGNED_BYTE, pixels);
+           break;
+        case 2:
+          glTexImage2D(GL_TEXTURE_2D, 0, GL_RG, size.x, size.y, 0, GL_RG, GL_UNSIGNED_BYTE, pixels);
+           break;
+        case 3:
+          glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, size.x, size.y, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+           break;
+        case 4:
+          glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, size.x, size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+           break;
+    }
+    
+    glGenerateMipmap(GL_TEXTURE_2D);  // is used to generate mipmaps for a texture
+    texture->unbind();
     
     stbi_image_free(pixels); //Free image data after uploading to GPU
     return texture;
