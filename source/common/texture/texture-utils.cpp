@@ -51,20 +51,24 @@ our::Texture2D* our::texture_utils::loadImage(const std::string& filename, bool 
        GL_RED: suitable for grayscale data.
        GL_RGB: suitable for RGB
     */
-    switch(channels){
-        case 1:
-           glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, size.x, size.y, 0, GL_RED, GL_UNSIGNED_BYTE, pixels);
-           break;
-        case 2:
-          glTexImage2D(GL_TEXTURE_2D, 0, GL_RG, size.x, size.y, 0, GL_RG, GL_UNSIGNED_BYTE, pixels);
-           break;
-        case 3:
-          glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, size.x, size.y, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
-           break;
-        case 4:
-          glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, size.x, size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
-           break;
-    }
+//    std::cout << "channel: " << channels << std::endl;
+   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, size.x, size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+    // switch(channels){
+    //     case 1:
+    //        glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, size.x, size.y, 0, GL_RED, GL_UNSIGNED_BYTE, pixels);
+    //        break;
+    //     case 2:
+    //       glTexImage2D(GL_TEXTURE_2D, 0, GL_RG8, size.x, size.y, 0, GL_RG, GL_UNSIGNED_BYTE, pixels);
+    //        break;
+    //     case 3:
+          
+    //     //   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, size.x, size.y, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+    //       glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, size.x, size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+    //        break;
+    //     case 4:
+    //       glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, size.x, size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+    //        break;
+    // }
     
     glGenerateMipmap(GL_TEXTURE_2D);  // is used to generate mipmaps for a texture
     texture->unbind();
