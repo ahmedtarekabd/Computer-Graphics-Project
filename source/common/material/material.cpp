@@ -9,14 +9,10 @@ namespace our
     // This function should setup the pipeline state and set the shader to be used
     void Material::setup() const
     {
+
         // TODO: (Req 7) Write this function
-        // ! Mesh mota2kd lesa
         pipelineState.setup();
         shader->use();
-        // shader->attach("textured.vert", GL_VERTEX_SHADER);
-        // shader->attach("textured.frag", GL_FRAGMENT_SHADER);
-        // shader->attach("tinted.vert", GL_VERTEX_SHADER);
-        // shader->attach("tinted.frag", GL_FRAGMENT_SHADER);
     }
 
     // This function read the material data from a json object
@@ -62,8 +58,12 @@ namespace our
         TintedMaterial::setup();
         shader->set("alphaThreshold", alphaThreshold);
 
+        glActiveTexture(GL_TEXTURE0);
         texture->bind();
-        // sampler->bind(GL_TEXTURE_2D);
+        // Then we bind the sampler to unit 0
+        sampler->bind(0);
+        // Then we send 0 (the index of the texture unit we used above) to the "tex" uniform
+        shader->set("tex", 0);
     }
 
     // This function read the material data from a json object
