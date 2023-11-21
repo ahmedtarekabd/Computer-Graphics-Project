@@ -10,6 +10,13 @@ namespace our
     void Material::setup() const
     {
         // TODO: (Req 7) Write this function
+        // ! Mesh mota2kd lesa
+        pipelineState.setup();
+        shader->use();
+        // shader->attach("textured.vert", GL_VERTEX_SHADER);
+        // shader->attach("textured.frag", GL_FRAGMENT_SHADER);
+        // shader->attach("tinted.vert", GL_VERTEX_SHADER);
+        // shader->attach("tinted.frag", GL_FRAGMENT_SHADER);
     }
 
     // This function read the material data from a json object
@@ -51,6 +58,12 @@ namespace our
     void TexturedMaterial::setup() const
     {
         // TODO: (Req 7) Write this function
+
+        TintedMaterial::setup();
+        shader->set("alphaThreshold", alphaThreshold);
+
+        texture->bind();
+        // sampler->bind(GL_TEXTURE_2D);
     }
 
     // This function read the material data from a json object
