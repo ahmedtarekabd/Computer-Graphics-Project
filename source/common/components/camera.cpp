@@ -63,7 +63,7 @@ namespace our
         //  It takes left, right, bottom, top. Bottom is -orthoHeight/2 and Top is orthoHeight/2.
         //  Left and Right are the same but after being multiplied by the aspect ratio
         //  For the perspective camera, you can use glm::perspective
-        float aspect_ratio = viewportSize.x / float(viewportSize.y);
+        float aspect_ratio = (float) viewportSize.x / viewportSize.y;
         float left = -aspect_ratio * (orthoHeight / 2.0f);
         float right = aspect_ratio * (orthoHeight / 2.0f);
         float bottom = -orthoHeight / 2.0f;
