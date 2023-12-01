@@ -53,8 +53,7 @@ class EntityTestState : public our::State
         // Then we compute the VP matrix from the camera
         glm::ivec2 size = getApp()->getFrameBufferSize();
         // TODO: (Req 8) Change the following line to compute the correct view projection matrix
-        glm::mat4 VP = glm::mat4(1.0f);
-        // camera->getProjectionMatrix() //but we don't have viewportsize
+        glm::mat4 VP = camera->getProjectionMatrix(size) * camera->getViewMatrix();
 
         for (auto &entity : world.getEntities())
         {
@@ -64,6 +63,13 @@ class EntityTestState : public our::State
                 continue;
             // TODO: (Req 8) Complete the loop body to draw the current entity
             //  Then we setup the material, send the transform matrix to the shader then draw the mesh
+
+            glm::mat4 M = entity->getLocalToWorldMatrix();
+
+            meshRenderer->material->setup();
+            meshRenderer->material->shader->set("transform", VP * M);
+            meshRenderer->mesh->draw();
+
         }
     }
 

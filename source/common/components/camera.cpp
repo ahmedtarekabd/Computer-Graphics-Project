@@ -64,18 +64,18 @@ namespace our
         //  Left and Right are the same but after being multiplied by the aspect ratio
         //  For the perspective camera, you can use glm::perspective
         float aspect_ratio = (float)viewportSize.x / viewportSize.y;
-        float left = -aspect_ratio * orthoHeight / 2.0f; // still need to be checked
-        float right = aspect_ratio * orthoHeight / 2.0f; // still need to be checked
+        float left = -aspect_ratio * orthoHeight / 2.0f;
+        float right = aspect_ratio * orthoHeight / 2.0f;
         float bottom = -orthoHeight / 2.0f;
         float top = orthoHeight / 2.0f;
 
         if (cameraType == CameraType::PERSPECTIVE)
         {
-            glm::perspective(fovY, aspect_ratio, near, far);
+            return glm::perspective(fovY, aspect_ratio, near, far);
         }
         else if (cameraType == CameraType::ORTHOGRAPHIC)
         {
-            glm::mat4 projection_matrix = glm::ortho(left, right, bottom, top, near, far);
+            return glm::ortho(left, right, bottom, top, near, far);
         }
         return glm::mat4(1.0f);
     }
