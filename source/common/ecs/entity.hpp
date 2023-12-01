@@ -39,7 +39,7 @@ namespace our
             // TODO: (Req 8) Create an component of type T, set its "owner" to be this entity, then push it into the component's list
             T *newcomponent = new T();          // create new component of type T
             newcomponent->owner = this;         // set its oowner to this entity
-            components.push_back(newcomponent); // add it to this entity components list
+            this->components.push_back(newcomponent); // add it to this entity components list
             return newcomponent;                // return the new component
         }
 
@@ -130,6 +130,7 @@ namespace our
             {
                 delete *it; // delete the component
             }
+            components.clear();
         }
 
         // Entities should not be copyable
