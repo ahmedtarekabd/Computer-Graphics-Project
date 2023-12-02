@@ -99,6 +99,8 @@ namespace our
         }
 
         // TODO: (Req 1) Delete the copy constructor and assignment operator.
+        ShaderProgram(const ShaderProgram&) = delete;
+        ShaderProgram& operator=(const ShaderProgram&) = delete;
         // Question: Why do we delete the copy constructor and assignment operator?
         // To follow the Resource Acquisition is Initialization Concept
         // which aims to prevent resource leakage and or aquiring freed/deleted resource
