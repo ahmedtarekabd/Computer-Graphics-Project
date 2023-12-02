@@ -60,10 +60,12 @@ namespace our
         TintedMaterial::setup();
         shader->set("alphaThreshold", alphaThreshold);
 
-        glActiveTexture(GL_TEXTURE0);
+        // glActiveTexture(GL_TEXTURE0);
         texture->bind();
-        // Then we bind the sampler to unit 0
-        sampler->bind(0);
+        // Then we bind the sampler to unit 0 if there is a sampler used
+        // Not used in menu-state materials
+        if (sampler)
+            sampler->bind(0);
         // Then we send 0 (the index of the texture unit we used above) to the "tex" uniform
         shader->set("tex", 0);
 
