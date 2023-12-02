@@ -62,10 +62,10 @@ namespace our {
             //TODO: (Req 11) Create a color and a depth texture and attach them to the framebuffer
             // Hints: The color format can be (Red, Green, Blue and Alpha components with 8 bits for each channel).
             // The depth format can be (Depth component with 24 bits).
-            Texture2D* color = texture_utils::empty(GL_RGBA8, windowSize);
-            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, color->getOpenGLName(), 0);
-            Texture2D* depth = texture_utils::empty(GL_DEPTH_COMPONENT24, windowSize);
-            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depth->getOpenGLName(), 0);
+            colorTarget = texture_utils::empty(GL_RGBA8, windowSize);
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorTarget->getOpenGLName(), 0);
+            depthTarget = texture_utils::empty(GL_DEPTH_COMPONENT24, windowSize);
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthTarget->getOpenGLName(), 0);
             
             //TODO: (Req 11) Unbind the framebuffer just to be safe
             glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -256,11 +256,11 @@ namespace our {
         if(postprocessMaterial){
             //TODO: (Req 11) Return to the default framebuffer
             glBindFramebuffer(GL_FRAMEBUFFER, 0);
-            //TODO: (Req 11) Setup the postprocess material and draw the fullscreen triangle
-            glBindVertexArray(postProcessVertexArray);
+            //TODO: (Req 11) Setup the postprocess material and draw the fullscreen triangle            
+
+            glBindVertexArray(postProcessVertexArray);            
             postprocessMaterial->setup();
-            // skySphere->draw();
-            glDrawArrays(GL_TRIANGLES, 0, 6);
+            glDrawArrays(GL_TRIANGLES, 0, 3);
             
         }
     }
