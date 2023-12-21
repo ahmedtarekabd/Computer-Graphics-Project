@@ -49,7 +49,7 @@ namespace our
             return glGetUniformLocation(program, name.c_str());
         }
 
-        // Osamaaaaaaaaaaaaaa
+        // Osama
         void set(const std::string &uniform, GLfloat value)
         {
             // TODO: (Req 1) Send the given float value to the given uniform
@@ -99,7 +99,15 @@ namespace our
         }
 
         // TODO: (Req 1) Delete the copy constructor and assignment operator.
+        ShaderProgram(const ShaderProgram&) = delete;
+        ShaderProgram& operator=(const ShaderProgram&) = delete;
         // Question: Why do we delete the copy constructor and assignment operator?
+        // To follow the Resource Acquisition is Initialization Concept
+        // which aims to prevent resource leakage and or aquiring freed/deleted resource
+        // For example: In the case of shaders we want only one entity/object to control 
+        // the Compilation, Aquiring, Deletion processes of a shader.
+        // To prevent an entity/object to delete a shader and another entity has a 
+        // handler to it (even though it is deleted).
     };
 
 }
