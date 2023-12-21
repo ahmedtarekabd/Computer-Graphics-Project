@@ -30,13 +30,15 @@
                 "grass": "assets/textures/grass_ground_d.jpg",
                 "wood": "assets/textures/wood.jpg",
                 "glass": "assets/textures/glass-panels.png",
-                "monkey": "assets/textures/monkey.png"
+                "monkey": "assets/textures/monkey.png",
+                "weapon": "assets/textures/remington_02_BaseColor.png"
             },
             "meshes":{
                 "cube": "assets/models/cube.obj",
                 "monkey": "assets/models/monkey.obj",
                 "plane": "assets/models/plane.obj",
-                "sphere": "assets/models/sphere.obj"
+                "sphere": "assets/models/sphere.obj",
+                "weapon": "assets/models/Remington_Model_M31.obj"
             },
             "samplers":{
                 "default":{},
@@ -124,6 +126,21 @@
                     "tint": [1, 1, 1, 1],
                     "texture": "moon",
                     "sampler": "default"
+                },
+                "weapon":{
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling":{
+                            "enabled": false
+                        },
+                        "depthTesting":{
+                            "enabled": true
+                        }
+                    },
+                    "tint": [1, 1, 1, 1],
+                    "texture": "weapon",
+                    "sampler": "default"
                 }
             }
         },
@@ -140,14 +157,14 @@
                 ],
                 "children": [
                     {
-                        "position": [1, -1, -1],
-                        "rotation": [45, 45, 0],
-                        "scale": [0.1, 0.1, 1.0],
+                        "position": [1, -0.7, -0.9],
+                        "rotation": [0, 180, 0],
+                        "scale": [1, 1, 1.0],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
-                                "mesh": "cube",
-                                "material": "metal"
+                                "mesh": "weapon",
+                                "material": "weapon"
                             }
                         ]
                     }
@@ -256,6 +273,6 @@
                     }
                 ]
             }
-        ]
+    ]
     }
 }
