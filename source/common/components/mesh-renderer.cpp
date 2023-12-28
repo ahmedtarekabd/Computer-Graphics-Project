@@ -16,18 +16,15 @@ namespace our
         // you can use write: data["key"].get<T>().
         // Look at "source/common/asset-loader.hpp" to know how to use the static class AssetLoader.
 
-
         // std::cout << "\nMesh Name: " << data["mesh"].get<std::string>() << std::endl;
         // std::cout << "Material Name: " << data["material"].get<std::string>() << std::endl;
         // std::cout << "\nMesh Name: " << data.value("mesh", "")<< std::endl;
 
         mesh = AssetLoader<Mesh>::get(data["mesh"].get<std::string>());
         material = AssetLoader<Material>::get(data["material"].get<std::string>());
-
         // if (mesh)
         //     std::cout << "Mesh: " << mesh << std::endl;
         // if (material)
         //     std::cout << "Material: " << material << std::endl;
-
     }
 }
