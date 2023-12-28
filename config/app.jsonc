@@ -16,6 +16,10 @@
         },
         "assets":{
             "shaders":{
+                "lited":{
+                    "vs":"assets/shaders/lit.vert",
+                    "fs":"assets/shaders/lit.frag"
+                },
                 "tinted":{
                     "vs":"assets/shaders/tinted.vert",
                     "fs":"assets/shaders/tinted.frag"
@@ -26,6 +30,32 @@
                 }
             },
             "textures":{
+
+                "concrete_color": "assets/textures/warehouse/concrete_color.png",
+                "concrete_met": "assets/textures/warehouse/concrete_met.png",
+                "concrete_nrm": "assets/textures/warehouse/concrete_nrm.png",
+                "concrete_rough": "assets/textures/warehouse/concrete_rough.png",
+                "floor_color": "assets/textures/warehouse/Floor_Color.png",
+                "floor_met": "assets/textures/warehouse/Floor_met.png",
+                "floor_nrm": "assets/textures/warehouse/Floor_nrm.png",
+                "floor_rough": "assets/textures/warehouse/Floor_rough.png",
+                "gates_color": "assets/textures/warehouse/gates_color.png",
+                "gates_met": "assets/textures/warehouse/gates_met.png",
+                "gates_nrm": "assets/textures/warehouse/gates_nrm.png",
+                "gates_rough": "assets/textures/warehouse/gates_rough.png",
+                "metal_color": "assets/textures/warehouse/Metal_color.png",
+                "metal_met": "assets/textures/warehouse/Metal_met.png",
+                "metal_nrm": "assets/textures/warehouse/Metal_nrm.png",
+                "metal_rough": "assets/textures/warehouse/Metal_rough.png",
+                "roof_color": "assets/textures/warehouse/roof_color.png",
+                "roof_met": "assets/textures/warehouse/roof_met.png",
+                "roof_nrm": "assets/textures/warehouse/roof_nrm.png",
+                "roof_rough": "assets/textures/warehouse/roof_rough.png",
+                "walls_color": "assets/textures/warehouse/walls_color.png",
+                "walls_met": "assets/textures/warehouse/walls_met.png",
+                "walls_nrm": "assets/textures/warehouse/walls_nrm.png",
+                "walls_rough": "assets/textures/warehouse/walls_rough.png",
+
                 "moon": "assets/textures/moon.jpg",
                 "grass": "assets/textures/grass_ground_d.jpg",
                 "wood": "assets/textures/wood.jpg",
@@ -33,8 +63,15 @@
                 "monkey": "assets/textures/monkey.png"
             },
             "meshes":{
+                "warehouse": "assets/models/warehouse.obj",
+                "closed_gates": "assets/models/warehouse/closed_gates.obj",
+                "columns": "assets/models/warehouse/columns.obj",
+                "floor": "assets/models/warehouse/floor.obj",
+                "frames": "assets/models/warehouse/frames.obj",
+                "opened_gates": "assets/models/warehouse/opened_gates.obj",
+                "roof": "assets/models/warehouse/roof.obj",
+                "walls": "assets/models/warehouse/walls.obj",
                 "cube": "assets/models/cube.obj",
-                "monkey": "assets/models/monkey.obj",
                 "plane": "assets/models/plane.obj",
                 "sphere": "assets/models/sphere.obj"
             },
@@ -95,7 +132,7 @@
                     "texture": "grass",
                     "sampler": "default"
                 },
-                "monkey":{
+                "warehouse":{
                     "type": "textured",
                     "shader": "textured",
                     "pipelineState": {
@@ -108,6 +145,22 @@
                     },
                     "tint": [1, 1, 1, 1],
                     "texture": "monkey",
+                    "sampler": "default"
+                },
+                "floor":{
+                    "type": "lited",
+                    "shader": "lited",
+                    "pipelineState": {
+                        "faceCulling":{
+                            "enabled": false
+                        },
+                        "depthTesting":{
+                            "enabled": true
+                        }
+                    },
+                    "tint": [1, 1, 1, 1],
+                    "albedo_map": "floor_color",
+                    "roughness_map": "floor_rough",
                     "sampler": "default"
                 },
                 "moon":{
@@ -154,17 +207,13 @@
                 ]
             },
             {
-                "rotation": [-45, 0, 0],
+                "position": [0, -1, 0],
+                "rotation": [0, 0, 0],
                 "components": [
                     {
                         "type": "Mesh Renderer",
-                        "mesh": "monkey",
-                        "material": "monkey"
-                    },
-                    {
-                        "type": "Movement",
-                        "linearVelocity": [0, 0.1, 0],
-                        "angularVelocity": [0, 45, 0]
+                        "mesh": "floor",
+                        "material": "warehouse"
                     }
                 ]
             },
