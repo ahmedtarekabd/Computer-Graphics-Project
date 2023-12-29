@@ -13,6 +13,9 @@
             "sky": "assets/textures/sky.jpg",
             "postprocess": "assets/shaders/postprocess/vignette.frag"
         },
+        "lighting": {
+            "shader": "lited"
+        },
         "assets": {
             "shaders": {
                 "lited": {
@@ -323,25 +326,25 @@
                     }
                 ]
             },
-            // {
-            //     // ! parent
-            //     "name": "Directional light",
-            //     "position": [1, 1, 1],
-            //     "rotation": [0, -1, 0],
-            //     // "scale": [0.001, 0.001, 0.001],
-            //     "components": [
-            //         // {
-            //         //     "type": "Mesh Renderer",
-            //         //     "mesh": "cube",
-            //         //     "material": "glass"
-            //         // },
-            //         {
-            //             "type": "Directional Light",
-            //             "color": [0.8, 0.8, 0.8]
-            //             // "direction": [1.0, 0.0, 0.0]
-            //         }
-            //     ]
-            // },
+            {
+                // ! parent
+                "name": "Light",
+                "position": [1, 1, 1],
+                "rotation": [0, -1, 0],
+                // "scale": [0.001, 0.001, 0.001],
+                "components": [
+                    // {
+                    //     "type": "Mesh Renderer",
+                    //     "mesh": "cube",
+                    //     "material": "glass"
+                    // },
+                    {
+                        "type": "Directional Light",
+                        "color": [1.0, 0.0, 0.0]
+                        // "direction": [1.0, 0.0, 0.0]
+                    }
+                ]
+            },
             {
                 "name":"monster",
                 "position": [0, -1, -2],

@@ -74,7 +74,7 @@ Material sample_material(TexturedMaterial tex_mat, vec2 tex_coord) {
 
 #define MAX_LIGHT_COUNT 16
 uniform Light lights[MAX_LIGHT_COUNT];
-uniform int light_count = 0;
+uniform int lightCount = 0;
 
 out vec4 frag_color;
 
@@ -84,7 +84,7 @@ void main() {
 
     vec3 normal = normalize(fsin.normal);
     vec3 view = normalize(fsin.view);
-    int count = int(min(light_count, MAX_LIGHT_COUNT));
+    int count = int(min(lightCount, MAX_LIGHT_COUNT));
     vec3 accumulated_light = vec3(0.0, 0.0, 0.0);
 
     // frag_color = vec4(texture(textured_material.albedo_map, fsin.tex_coord).rgb, 1.0);
@@ -97,7 +97,9 @@ void main() {
     
     accumulated_light += acutalMaterial.ambient;
 
-    if (light_count == 0) {
+    frag_color = vec4(lights[0].direction, 1.0);
+    return;
+    if (lightCount == 0) {
         frag_color = vec4(0.25, 0.25, 0.25, 1.0);
         return;
     }

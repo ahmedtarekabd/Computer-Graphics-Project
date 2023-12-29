@@ -41,8 +41,9 @@ class Playstate : public our::State
         auto size = getApp()->getFrameBufferSize();
         renderer.initialize(size, config["renderer"]);
 
+        std::cout << "lightingSystem.initialize" << std::endl;
         // Initalize Light
-        lightingSystem.initialize(world, config["lighting"]);
+        lightingSystem.initialize(&world, config["lighting"]);
 
         // Initalize Collision
     }
@@ -53,6 +54,7 @@ class Playstate : public our::State
         movementSystem.update(&world, (float)deltaTime);
         cameraController.update(&world, (float)deltaTime);
         collisionSystem.update(&world, (float)deltaTime);
+        // lightingSystem.update();
         // And finally we use the renderer system to draw the scene
         renderer.render(&world);
 
