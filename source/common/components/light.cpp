@@ -45,9 +45,6 @@ namespace our
         currentLightIndex++;
         // Set light index with current light index
         lightIndex = currentLightIndex;
-
-        // // TODO: Set this light's shader to the shader program specified in the config (in lighting-system.cpp)
-        // shader = AssetLoader<ShaderProgram>::get(data["shader"].get<std::string>());
     }
 
     // Set uniform values for the shader
@@ -56,12 +53,17 @@ namespace our
 
         shader->use();
 
+        std::cout << "LightComponent::deserialize " << lightIndex << std::endl;
+        std::cout << "LightComponent::deserialize " << type << std::endl;
+        std::cout << "LightComponent::deserialize " << diffuse.r << " " << diffuse.g << " " << diffuse.b << std::endl;
+        std::cout << "LightComponent::deserialize " << ambient.r << " " << ambient.g << " " << ambient.b << std::endl;
+
         // Set light vector uniform values in the shader
         // Source: https://stackoverflow.com/questions/23591264/how-to-pass-uniform-array-of-struct-to-shader-via-c-code
-        shader->set("lights[" + std::to_string(lightIndex) + "].type", type);
-        shader->set("lights[" + std::to_string(lightIndex) + "].diffuse", diffuse);
-        shader->set("lights[" + std::to_string(lightIndex) + "].specular", specular);
-        shader->set("lights[" + std::to_string(lightIndex) + "].ambient", ambient);
+        shader->set("lights[" + std::to_string(lightIndex - 1) + "].type", type);
+        shader->set("lights[" + std::to_string(lightIndex - 1) + "].diffuse", diffuse);
+        shader->set("lights[" + std::to_string(lightIndex - 1) + "].specular", specular);
+        shader->set("lights[" + std::to_string(lightIndex - 1) + "].ambient", ambient);
     }
 
     // ********** Directional Light **********
@@ -75,7 +77,7 @@ namespace our
 
         glm::quat rotation = glm::quat_cast(model_matrix);
         glm::vec3 eulerAngles = glm::degrees(glm::eulerAngles(rotation));
-        direction = -glm::normalize(eulerAngles);
+        direction = glm::normalize(eulerAngles);
 
         std::cout << "DirectionalLight::deserialize " << direction.r << " " << direction.g << " " << direction.b << std::endl;
     }
@@ -84,7 +86,7 @@ namespace our
     {
         std::cout << "DirectionalLight::setUniforms" << std::endl;
         LightComponent::setUniforms(shader);
-        shader->set("lights[" + std::to_string(lightIndex) + "].direction", direction);
+        shader->set("lights[" + std::to_string(lightIndex - 1) + "].direction", direction);
     }
 
     // ********** Point Light **********
@@ -101,8 +103,8 @@ namespace our
     {
         std::cout << "PointLight::setUniforms" << std::endl;
         LightComponent::setUniforms(shader);
-        shader->set("lights[" + std::to_string(lightIndex) + "].position", position);
-        shader->set("lights[" + std::to_string(lightIndex) + "].attenuation", attenuation);
+        shader->set("lights[" + std::to_string(lightIndex - 1) + "].position", position);
+        shader->set("lights[" + std::to_string(lightIndex - 1) + "].attenuation", attenuation);
     }
 
     // ********** Spot Light **********
@@ -127,11 +129,11 @@ namespace our
     {
         std::cout << "SpotLight::setUniforms" << std::endl;
         LightComponent::setUniforms(shader);
-        shader->set("lights[" + std::to_string(lightIndex) + "].position", position);
-        shader->set("lights[" + std::to_string(lightIndex) + "].direction", direction);
-        shader->set("lights[" + std::to_string(lightIndex) + "].attenuation", attenuation);
-        shader->set("lights[" + std::to_string(lightIndex) + "].inner_angle", inner_angle);
-        shader->set("lights[" + std::to_string(lightIndex) + "].outer_angle", outer_angle);
+        shader->set("lights[" + std::to_string(lightIndex - 1) + "].position", position);
+        shader->set("lights[" + std::to_string(lightIndex - 1) + "].direction", direction);
+        shader->set("lights[" + std::to_string(lightIndex - 1) + "].attenuation", attenuation);
+        shader->set("lights[" + std::to_string(lightIndex - 1) + "].inner_angle", inner_angle);
+        shader->set("lights[" + std::to_string(lightIndex - 1) + "].outer_angle", outer_angle);
     }
 
 }

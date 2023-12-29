@@ -142,6 +142,15 @@ namespace our
             sampler->bind(5);
             shader->set("textured_material.emissive_map", 5);
         }
+
+        if (normal_map)
+        {
+            // Bind the first roughness_map to unit 6
+            glActiveTexture(GL_TEXTURE5);
+            normal_map->bind();
+            sampler->bind(6);
+            shader->set("textured_material.normal_map", 6);
+        }
     }
 
     // This function read the material data from a json object
@@ -159,16 +168,18 @@ namespace our
         roughness_map = AssetLoader<Texture2D>::get(data.value("roughness_map", ""));
         emissive_map = AssetLoader<Texture2D>::get(data.value("emissive_map", ""));
 
+        normal_map = AssetLoader<Texture2D>::get(data.value("normal_map", ""));
+
         albedo_tint = data.value("albedo_tint", glm::vec3(1.0f));
         specular_tint = data.value("specular_tint", glm::vec3(1.0f));
-        emissive_tint = data.value("emissive_tint", glm::vec3(0.0f));
+        emissive_tint = data.value("emissive_tint", glm::vec3(1.0f));
 
         if (!albedo_map)
             albedo_map = texture_utils::textureColor(data.value("albedo_tint", glm::vec4(1.0f)));
         if (!specular_map)
             specular_map = texture_utils::textureColor(glm::vec4(1.0f));
         if (!ambient_occlusion_map)
-            ambient_occlusion_map = texture_utils::textureColor(glm::vec4(0.25f));
+            ambient_occlusion_map = texture_utils::textureColor(glm::vec4(0.15f));
         if (!roughness_map)
             roughness_map = texture_utils::textureColor(glm::vec4(1.0f));
         if (!emissive_map)

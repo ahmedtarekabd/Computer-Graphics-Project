@@ -76,7 +76,8 @@ namespace our
         Texture2D *roughness_map;
         glm::vec2 roughness_range;
 
-        // Optional
+        Texture2D *normal_map;
+
         Texture2D *emissive_map;
         glm::vec3 emissive_tint;
         float alphaThreshold;

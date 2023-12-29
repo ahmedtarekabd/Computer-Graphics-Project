@@ -48,23 +48,19 @@ struct TexturedMaterial {
     
     sampler2D emissive_map;
     vec3 emissive_tint;
+
+    sampler2D normal_map;
+
 };
-
-// If the material is not textured
-uniform Material material = Material(vec3(1.0), vec3(1.0), vec3(1.0), vec3(1.0), -1.0);    // Initalize shininess with -1 to indicate that the material is textured
-
-uniform TexturedMaterial textured_material;
 
 // If the material is textured
 Material sample_material(TexturedMaterial tex_mat, vec2 tex_coord) {
     Material mat;
 
-    // mat.diffuse = texture(tex_mat.albedo_map, tex_coord).rgb;
     mat.diffuse = tex_mat.albedo_tint * texture(tex_mat.albedo_map, tex_coord).rgb;
     mat.specular = tex_mat.specular_tint * texture(tex_mat.specular_map, tex_coord).rgb;
     mat.emissive = tex_mat.emissive_tint * texture(tex_mat.emissive_map, tex_coord).rgb;
     mat.ambient = mat.diffuse * texture(tex_mat.ambient_occlusion_map, tex_coord).r;
-    // mat.ambient = vec3(1.0);
 
     float roughness = mix(tex_mat.roughness_range.x, tex_mat.roughness_range.y, texture(tex_mat.roughness_map, tex_coord).r);
     mat.shininess = 2.0 / pow(clamp(roughness, 0.001, 0.999), 4.0) - 2.0;
@@ -72,39 +68,41 @@ Material sample_material(TexturedMaterial tex_mat, vec2 tex_coord) {
     return mat;
 }
 
+// *Light
 #define MAX_LIGHT_COUNT 16
 uniform Light lights[MAX_LIGHT_COUNT];
 uniform int lightCount = 0;
 
+// *Material
+// If the material is not textured
+uniform Material material = Material(vec3(1.0), vec3(1.0), vec3(1.0), vec3(1.0), -1.0);    // Initalize shininess with -1 to indicate that the material is textured
+uniform TexturedMaterial textured_material;
+
+// *Output
 out vec4 frag_color;
 
 void main() {
-    // frag_color = vec4(1.0, 0.0, 0.0, 1.0);
-    // return;
 
     vec3 normal = normalize(fsin.normal);
     vec3 view = normalize(fsin.view);
     int count = int(min(lightCount, MAX_LIGHT_COUNT));
     vec3 accumulated_light = vec3(0.0, 0.0, 0.0);
 
-    // frag_color = vec4(texture(textured_material.albedo_map, fsin.tex_coord).rgb, 1.0);
-
     Material acutalMaterial = material;
+
+    // // obtain normal from normal map in range [0,1]
+    // normal = texture(normal_map, fsin.tex_coord).rgb;
+    // // transform normal vector to range [-1,1]
+    // normal = normalize(normal * 2.0 - 1.0);
 
     // If the material is textured. If the material is textured, the shininess will be -1
     if (material.shininess < 0.0)
         acutalMaterial = sample_material(textured_material, fsin.tex_coord);
-    
-    accumulated_light += acutalMaterial.ambient;
 
-    frag_color = vec4(lights[0].direction, 1.0);
-    return;
-    if (lightCount == 0) {
-        frag_color = vec4(0.25, 0.25, 0.25, 1.0);
-        return;
-    }
-
+    // count = 0;
     for (int index = 0; index < count; index++) {
+
+
         Light light = lights[index];
         vec3 light_direction;
         float attenuation = 1;
@@ -137,8 +135,8 @@ void main() {
         vec3 diffuse = acutalMaterial.diffuse * light.diffuse * lambert;
         vec3 specular = acutalMaterial.specular * light.specular * phong;
         vec3 ambient = acutalMaterial.ambient * light.ambient;
-        accumulated_light += (diffuse + specular) * attenuation + ambient;
-        // accumulated_light += diffuse * attenuation;
+        accumulated_light += (diffuse + specular) * attenuation + ambient;        
+
     }
 
     frag_color = fsin.color * vec4(accumulated_light, 1.0);
