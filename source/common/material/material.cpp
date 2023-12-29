@@ -92,9 +92,9 @@ namespace our
         shader->set("textured_material.specular_tint", specular_tint);
         shader->set("textured_material.emissive_tint", emissive_tint);
 
-        std::cout << "setup textured lit material albedo: " << albedo_map << std::endl;
-        std::cout << "setup textured lit material roughness: " << roughness_map << std::endl;
-        std::cout << "setup textured lit material specular: " << specular_map << std::endl;
+        // std::cout << "setup textured lit material albedo: " << albedo_map << std::endl;
+        // std::cout << "setup textured lit material roughness: " << roughness_map << std::endl;
+        // std::cout << "setup textured lit material specular: " << specular_map << std::endl;
 
         if (albedo_map)
         {

@@ -7,6 +7,8 @@
 #include <glm/mat4x4.hpp>
 #include <shader/shader.hpp>
 
+#include <iostream>
+
 namespace our
 {
 
@@ -14,20 +16,16 @@ namespace our
     class LightComponent : public Component
     {
 
+    public:
         // Light source index
         static int currentLightIndex;
         // Number of lights
         static int lightCount;
 
-    public:
         ShaderProgram *shader;
-
-        // // Any light component should have a transform component
-        // TransformComponent *transform;
 
         // Light source index
         int lightIndex;
-
         // Light type
         int type;
 
@@ -38,12 +36,19 @@ namespace our
 
         // The ID of this component type is "Light"
         static std::string getID() { return "Light"; }
+        // The set number of light components to the shader
+        static void setNumberOfLightComponents(ShaderProgram *shader)
+        {
+            std::cout << "LightComponent::setNumberOfLightComponents" << lightCount << std::endl;
+            shader->use();
+            shader->set("lightCount", lightCount);
+        }
 
         // Reads light parameters from the given json object
         virtual void deserialize(const nlohmann::json &data) override;
 
         // Set uniform values for the shader
-        virtual void setup();
+        virtual void setUniforms(ShaderProgram *shader);
     };
 
     //* Directional Types
@@ -55,7 +60,7 @@ namespace our
 
         static std::string getID() { return "Directional Light"; }
         void deserialize(const nlohmann::json &data) override;
-        void setup() override;
+        void setUniforms(ShaderProgram *shader) override;
     };
 
     //* Point Types
@@ -74,7 +79,7 @@ namespace our
         void deserialize(const nlohmann::json &data) override;
 
         // Set uniform values for the shader
-        void setup() override;
+        void setUniforms(ShaderProgram *shader) override;
     };
 
     //* Spot Types
@@ -98,7 +103,7 @@ namespace our
         void deserialize(const nlohmann::json &data) override;
 
         // Set uniform values for the shader
-        void setup() override;
+        void setUniforms(ShaderProgram *shader) override;
     };
 
 }

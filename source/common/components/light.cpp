@@ -41,21 +41,20 @@ namespace our
         diffuse = data.value("diffuse", glm::vec3(0.0f, 0.0f, 0.0f));
         specular = data.value("specular", glm::vec3(0.0f, 0.0f, 0.0f));
         ambient = data.value("ambient", glm::vec3(0.0f, 0.0f, 0.0f));
-        // Set light index with current light index
-        lightIndex = currentLightIndex;
         // Increment current light index
         currentLightIndex++;
+        // Set light index with current light index
+        lightIndex = currentLightIndex;
 
-        // shader = nullptr;
-        shader = AssetLoader<ShaderProgram>::get(data["shader"].get<std::string>());
+        // // TODO: Set this light's shader to the shader program specified in the config (in lighting-system.cpp)
+        // shader = AssetLoader<ShaderProgram>::get(data["shader"].get<std::string>());
     }
 
     // Set uniform values for the shader
-    void LightComponent::setup()
+    void LightComponent::setUniforms(ShaderProgram *shader)
     {
 
-        // Send total number of light sources to the shader
-        shader->set("lightCount", lightCount);
+        shader->use();
 
         // Set light vector uniform values in the shader
         // Source: https://stackoverflow.com/questions/23591264/how-to-pass-uniform-array-of-struct-to-shader-via-c-code
@@ -68,7 +67,7 @@ namespace our
     // ********** Directional Light **********
     void DirectionalLight::deserialize(const nlohmann::json &data)
     {
-        deserialize(data);
+        LightComponent::deserialize(data);
 
         glm::mat4 model_matrix = this->getOwner()->getLocalToWorldMatrix();
 
@@ -76,29 +75,32 @@ namespace our
 
         glm::quat rotation = glm::quat_cast(model_matrix);
         glm::vec3 eulerAngles = glm::degrees(glm::eulerAngles(rotation));
-        direction = glm::normalize(eulerAngles);
+        direction = -glm::normalize(eulerAngles);
+
+        std::cout << "DirectionalLight::deserialize " << direction.r << " " << direction.g << " " << direction.b << std::endl;
     }
 
-    void DirectionalLight::setup()
+    void DirectionalLight::setUniforms(ShaderProgram *shader)
     {
-        setup();
+        std::cout << "DirectionalLight::setUniforms" << std::endl;
+        LightComponent::setUniforms(shader);
         shader->set("lights[" + std::to_string(lightIndex) + "].direction", direction);
     }
 
     // ********** Point Light **********
     void PointLight::deserialize(const nlohmann::json &data)
     {
-        deserialize(data);
+        LightComponent::deserialize(data);
         glm::mat4 model_matrix = this->getOwner()->getLocalToWorldMatrix();
         position = glm::vec3(model_matrix[3][0], model_matrix[3][1], model_matrix[3][2]);
 
-        // position = data.value("position", glm::vec3(0.0f, 0.0f, 0.0f));
         attenuation = data.value("attenuation", glm::vec3(0.0f, 0.0f, 0.0f));
     }
 
-    void PointLight::setup()
+    void PointLight::setUniforms(ShaderProgram *shader)
     {
-        setup();
+        std::cout << "PointLight::setUniforms" << std::endl;
+        LightComponent::setUniforms(shader);
         shader->set("lights[" + std::to_string(lightIndex) + "].position", position);
         shader->set("lights[" + std::to_string(lightIndex) + "].attenuation", attenuation);
     }
@@ -106,7 +108,7 @@ namespace our
     // ********** Spot Light **********
     void SpotLight::deserialize(const nlohmann::json &data)
     {
-        deserialize(data);
+        LightComponent::deserialize(data);
 
         glm::mat4 model_matrix = this->getOwner()->getLocalToWorldMatrix();
         position = glm::vec3(model_matrix[3][0], model_matrix[3][1], model_matrix[3][2]);
@@ -121,9 +123,10 @@ namespace our
         outer_angle = data.value("outer_angle", 0.0f);
     }
 
-    void SpotLight::setup()
+    void SpotLight::setUniforms(ShaderProgram *shader)
     {
-        setup();
+        std::cout << "SpotLight::setUniforms" << std::endl;
+        LightComponent::setUniforms(shader);
         shader->set("lights[" + std::to_string(lightIndex) + "].position", position);
         shader->set("lights[" + std::to_string(lightIndex) + "].direction", direction);
         shader->set("lights[" + std::to_string(lightIndex) + "].attenuation", attenuation);
