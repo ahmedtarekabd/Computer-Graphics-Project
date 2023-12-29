@@ -61,7 +61,12 @@
                 "grass": "assets/textures/grass_ground_d.jpg",
                 "wood": "assets/textures/wood.jpg",
                 "glass": "assets/textures/glass-panels.png",
-                "monkey": "assets/textures/monkey.png"
+                "monkey": "assets/textures/monkey.png",
+                "weapon": "assets/textures/Shotgun_HDRP_BaseMap.png",
+                "monster": "assets/textures/lava.png",
+                "wall": "assets/textures/wall.jpg",
+                "asphalt": "assets/textures/black-road-texture.jpg",
+                "ghost": "assets/textures/78045.jpg"
             },
             "meshes": {
                 "warehouse": "assets/models/warehouse.obj",
@@ -74,7 +79,10 @@
                 // "walls": "assets/models/warehouse/walls.obj",
                 "cube": "assets/models/cube.obj",
                 "plane": "assets/models/plane.obj",
-                "sphere": "assets/models/sphere.obj"
+                "sphere": "assets/models/sphere.obj",
+                "weapon": "assets/models/shotgun2.obj",
+                "monster": "assets/models/zombie.obj",
+                "ghost": "assets/models/ghost_by_dommk.obj"
             },
             "samplers": {
                 "default": {},
@@ -94,7 +102,7 @@
                             "enabled": true
                         }
                     },
-                    "tint": [0.45, 0.4, 0.5, 1]
+                    "tint": [1, 0, 0, 1]
                 },
                 "glass": {
                     "type": "textured",
@@ -193,29 +201,125 @@
                     "texture": "moon",
                     "albedo_map": "moon",
                     "sampler": "default"
+                },
+                "weapon":{
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling":{
+                            "enabled": false
+                        },
+                        "depthTesting":{
+                            "enabled": true
+                        }
+                    },
+                    "tint": [1, 1, 1, 1],
+                    "texture": "weapon",
+                    "sampler": "default"
+                },
+                "monster":{
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling":{
+                            "enabled": false
+                        },
+                        "depthTesting":{
+                            "enabled": true
+                        }
+                    },
+                    "tint": [1, 1, 1, 1],
+                    "texture": "monster",
+                    "sampler": "default"
+                },
+                "wall":{
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling":{
+                            "enabled": false
+                        },
+                        "depthTesting":{
+                            "enabled": true
+                        }
+                    },
+                    "tint": [1, 1, 1, 1],
+                    "texture": "wall",
+                    "sampler": "default"
+                },
+                "asphalt":{
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling":{
+                            "enabled": false
+                        },
+                        "depthTesting":{
+                            "enabled": true
+                        }
+                    },
+                    "tint": [1, 1, 1, 1],
+                    "texture": "asphalt",
+                    "sampler": "default"
+                },"ghost":{
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling":{
+                            "enabled": false
+                        },
+                        "depthTesting":{
+                            "enabled": true
+                        }
+                    },
+                    "tint": [1, 1, 1, 1],
+                    "texture": "ghost",
+                    "sampler": "default"
                 }
             }
         },
         "world": [
             {
-                "position": [0, 0, 10],
+                "name":"player",
+                "position": [0, 0, 5],
                 "components": [
                     {
                         "type": "Camera"
                     },
                     {
                         "type": "Free Camera Controller"
+                    },
+                    {
+                        "type":"Collision"
+                        // "CollisionRadius": "1"
                     }
                 ],
                 "children": [
                     {
-                        "position": [1, -1, -1],
-                        "rotation": [45, 45, 0],
-                        "scale": [0.1, 0.1, 1.0],
+                        "name":"weapon",
+                        "position": [0.8, -1.8, 0],
+                        "rotation": [-2, 90, 0],
+                        "scale": [7, 7, 5],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
-                                "mesh": "cube",
+                                "mesh": "weapon",
+                                "material": "weapon"
+                            },
+                            {
+                                "type":"Collision"
+                            }
+                        ]
+                    },
+                    {
+                        "name":"target",
+                        "position": [0.3, -0.5, -5],
+                        "rotation": [0, 0, 0],
+                        "scale": [0.1, 0.1, 0.1],
+                        "components": [
+                            {
+                                "type": "Mesh Renderer",
+                                "mesh": "plane",
                                 "material": "metal"
                             }
                         ]
@@ -242,6 +346,61 @@
                 ]
             },
             {
+                "name":"monster",
+                "position": [0, -1, -2],
+                "rotation": [0, 0, 0],
+                "scale": [0.22, 0.22, 0.22],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "monster",
+                        "material": "monster"
+
+                    },
+                    {
+                        "type": "Movement",
+                        "linearVelocity": [0, 0, 0]//,
+                       // "angularVelocity": [0, 45, 0]
+                    },
+                    {
+                        "type":"Collision",
+                        "CollisionRadius": 2
+                    }
+                ]
+            },            
+            // {
+            //     "name":"monster",
+            //     "position": [2, -1, -2],
+            //     "rotation": [0, 0, 0],
+            //     "scale": [0.25, 0.25, 0.25],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "monster",
+            //             "material": "monster"
+            //             //monster height:15
+            //             //monster width:7
+            //         },
+            //         {
+            //             "type": "Movement",
+            //             "linearVelocity": [0, 0, 0]//,
+            //            // "angularVelocity": [0, 45, 0]
+            //         },
+            //         {
+            //             "type":"Collision"
+                    
+            //         }
+            //     ]
+            // },
+            {
+                "position": [2, -1, -2],
+                "rotation": [0, 0, 0],
+                "scale": [0.1, 0.1, 0.1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "sphere",
+                        "material": "metal"
                 "position": [0, -1, 0],
                 "rotation": [0, 0, 0],
                 "components": [
@@ -253,6 +412,83 @@
                 ]
             },
             {
+                "position": [2, 0, -6],
+                "rotation": [0, 180, 0],
+                "scale": [0.003, 0.003, 0.003],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "ghost",
+                        "material": "ghost"
+                    },
+                    {
+                        "type": "Movement",
+                        "linearVelocity": [0, 0, 0]//,
+                       // "angularVelocity": [0, 45, 0]
+                    }
+                ]
+            },
+            {
+                "position": [10, 4, 0],
+                "rotation": [0, -90, 0],
+                "scale": [10, 5, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "plane",
+                        "material": "wall"
+                    }
+                ]
+            },
+            {
+                "position": [0, 4, -10],
+                "rotation": [0, 0, 0],
+                "scale": [10, 5, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "plane",
+                        "material": "wall"
+                    }
+                ]
+            },
+            {
+                "position": [0, 4, 10],
+                "rotation": [0, 0, 0],
+                "scale": [10, 5, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "plane",
+                        "material": "wall"
+                    }
+                ]
+            },
+            {
+                "position": [-10, 4, 0],
+                "rotation": [0, -90, 0],
+                "scale": [10, 5, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "plane",
+                        "material": "wall"
+                    }
+                ]
+            },
+            {
+                "position": [0, 9, 0],
+                "rotation": [-90, 0, 0],
+                "scale": [10, 10, 1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "plane",
+                        "material": "glass"
+                    }
+                ]
+            },
+            {
                 "position": [0, -1, 0],
                 "rotation": [-90, 0, 0],
                 "scale": [10, 10, 1],
@@ -260,86 +496,86 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "plane",
-                        "material": "grass"
+                        "material": "asphalt"
                     }
                 ]
-            },
-            {
-                "position": [0, 1, 2],
-                "rotation": [0, 0, 0],
-                "scale": [2, 2, 2],
-                "components": [
-                    {
-                        "type": "Mesh Renderer",
-                        "mesh": "plane",
-                        "material": "glass"
-                    }
-                ]
-            },
-            {
-                "position": [0, 1, -2],
-                "rotation": [0, 0, 0],
-                "scale": [2, 2, 2],
-                "components": [
-                    {
-                        "type": "Mesh Renderer",
-                        "mesh": "plane",
-                        "material": "glass"
-                    }
-                ]
-            },
-            {
-                "position": [2, 1, 0],
-                "rotation": [0, 90, 0],
-                "scale": [2, 2, 2],
-                "components": [
-                    {
-                        "type": "Mesh Renderer",
-                        "mesh": "plane",
-                        "material": "glass"
-                    }
-                ]
-            },
-            {
-                "position": [-2, 1, 0],
-                "rotation": [0, 90, 0],
-                "scale": [2, 2, 2],
-                "components": [
-                    {
-                        "type": "Mesh Renderer",
-                        "mesh": "plane",
-                        "material": "glass"
-                    }
-                ]
-            },
-            {
-                "position": [0, 3, 0],
-                "rotation": [90, 0, 0],
-                "scale": [2, 2, 2],
-                "components": [
-                    {
-                        "type": "Mesh Renderer",
-                        "mesh": "plane",
-                        "material": "glass"
-                    }
-                ]
-            },
-            {
-                "position": [0, 10, 0],
-                "rotation": [45, 45, 0],
-                "scale": [5, 5, 5],
-                "components": [
-                    {
-                        "type": "Mesh Renderer",
-                        "mesh": "sphere",
-                        "material": "moon"
-                    },
-                    {
-                        "type": "Movement",
-                        "angularVelocity": [0, 90, 0]
-                    }
-                ]
-            }
-        ]
+            }//,
+            // {
+            //     "position": [0, 1, 2],
+            //     "rotation": [0, 0, 0],
+            //     "scale": [2, 2, 2],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "plane",
+            //             "material": "glass"
+            //         }
+            //     ]
+            // },
+            // {
+            //     "position": [0, 1, -2],
+            //     "rotation": [0, 0, 0],
+            //     "scale": [2, 2, 2],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "plane",
+            //             "material": "glass"
+            //         }
+            //     ]
+            // },
+            // {
+            //     "position": [2, 1, 0],
+            //     "rotation": [0, 90, 0],
+            //     "scale": [2, 2, 2],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "plane",
+            //             "material": "glass"
+            //         }
+            //     ]
+            // },
+            // {
+            //     "position": [-2, 1, 0],
+            //     "rotation": [0, 90, 0],
+            //     "scale": [2, 2, 2],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "plane",
+            //             "material": "glass"
+            //         }
+            //     ]
+            // },
+            // {
+            //     "position": [0, 3, 0],
+            //     "rotation": [90, 0, 0],
+            //     "scale": [2, 2, 2],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "plane",
+            //             "material": "glass"
+            //         }
+            //     ]
+            // },
+            // {
+            //     "position": [0, 10, 0],
+            //     "rotation": [45, 45, 0],
+            //     "scale": [5, 5, 5],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "sphere",
+            //             "material": "moon"
+            //         },
+            //         {
+            //             "type": "Movement",
+            //             "angularVelocity": [0, 90, 0]
+            //         }
+            //     ]
+            // }
+    ]
     }
 }

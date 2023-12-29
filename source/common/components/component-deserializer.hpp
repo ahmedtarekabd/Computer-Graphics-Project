@@ -6,6 +6,7 @@
 #include "free-camera-controller.hpp"
 #include "light.hpp"
 #include "movement.hpp"
+#include "Collision.hpp"
 
 namespace our
 {
@@ -33,6 +34,9 @@ namespace our
         {
             component = entity->addComponent<MeshRendererComponent>();
         }
+        else if (type == CollisionComponent::getID())
+        {
+            component = entity->addComponent<CollisionComponent>();
         else if (type == DirectionalLight::getID())
         {
             std::cout << "Directional Light" << std::endl;

@@ -6,6 +6,7 @@
 #include <systems/forward-renderer.hpp>
 #include <systems/free-camera-controller.hpp>
 #include <systems/movement.hpp>
+#include <systems/collision.hpp>
 #include <systems/lighting.hpp>
 #include <asset-loader.hpp>
 
@@ -17,6 +18,7 @@ class Playstate : public our::State
     our::ForwardRenderer renderer;
     our::FreeCameraControllerSystem cameraController;
     our::MovementSystem movementSystem;
+    our::CollisionSystem collisionSystem;
     our::LightingSystem lightingSystem;
 
     void onInitialize() override
@@ -51,6 +53,7 @@ class Playstate : public our::State
         // Here, we just run a bunch of systems to control the world logic
         movementSystem.update(&world, (float)deltaTime);
         cameraController.update(&world, (float)deltaTime);
+        collisionSystem.update(&world, (float)deltaTime);
         // lightingSystem.update();
         // And finally we use the renderer system to draw the scene
         renderer.render(&world);
