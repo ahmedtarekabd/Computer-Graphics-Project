@@ -5,6 +5,7 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <iostream>
 
 #define TYPE_DIRECTIONAL 0
 #define TYPE_POINT 1
@@ -23,7 +24,20 @@ namespace our
         if (!data.is_object())
             return;
 
-        type = data.value("type", TYPE_DIRECTIONAL);
+        std::cout << "LightComponent::deserialize" << std::endl;
+
+        type = TYPE_DIRECTIONAL;
+
+        std::string componentType = data.value("type", "");
+        if (componentType == "Directional Light")
+            type = TYPE_DIRECTIONAL;
+        else if (componentType == "Point Light")
+            type = TYPE_POINT;
+        else if (componentType == "Spot Light")
+            type = TYPE_SPOT;
+        else
+            std::cout << "Light type is wrong or not specified." << std::endl;
+
         diffuse = data.value("diffuse", glm::vec3(0.0f, 0.0f, 0.0f));
         specular = data.value("specular", glm::vec3(0.0f, 0.0f, 0.0f));
         ambient = data.value("ambient", glm::vec3(0.0f, 0.0f, 0.0f));
@@ -37,7 +51,7 @@ namespace our
     }
 
     // Set uniform values for the shader
-    void LightComponent::setUniforms()
+    void LightComponent::setup()
     {
 
         // Send total number of light sources to the shader
@@ -65,9 +79,9 @@ namespace our
         direction = glm::normalize(eulerAngles);
     }
 
-    void DirectionalLight::setUniforms()
+    void DirectionalLight::setup()
     {
-        setUniforms();
+        setup();
         shader->set("lights[" + std::to_string(lightIndex) + "].direction", direction);
     }
 
@@ -82,9 +96,9 @@ namespace our
         attenuation = data.value("attenuation", glm::vec3(0.0f, 0.0f, 0.0f));
     }
 
-    void PointLight::setUniforms()
+    void PointLight::setup()
     {
-        setUniforms();
+        setup();
         shader->set("lights[" + std::to_string(lightIndex) + "].position", position);
         shader->set("lights[" + std::to_string(lightIndex) + "].attenuation", attenuation);
     }
@@ -107,9 +121,9 @@ namespace our
         outer_angle = data.value("outer_angle", 0.0f);
     }
 
-    void SpotLight::setUniforms()
+    void SpotLight::setup()
     {
-        setUniforms();
+        setup();
         shader->set("lights[" + std::to_string(lightIndex) + "].position", position);
         shader->set("lights[" + std::to_string(lightIndex) + "].direction", direction);
         shader->set("lights[" + std::to_string(lightIndex) + "].attenuation", attenuation);

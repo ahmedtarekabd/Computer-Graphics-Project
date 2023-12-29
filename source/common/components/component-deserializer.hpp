@@ -35,6 +35,7 @@ namespace our
         }
         else if (type == DirectionalLight::getID())
         {
+            std::cout << "Directional Light" << std::endl;
             component = entity->addComponent<DirectionalLight>();
         }
         else if (type == PointLight::getID())

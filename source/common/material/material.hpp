@@ -57,29 +57,6 @@ namespace our
         void deserialize(const nlohmann::json &data) override;
     };
 
-    class LitMaterial : public Material
-    {
-    public:
-        Texture2D *albedo_map;
-        glm::vec3 albedo_tint;
-
-        Texture2D *specular_map;
-        glm::vec3 specular_tint;
-
-        Texture2D *ambient_occlusion_map;
-        Texture2D *roughness_map;
-        glm::vec2 roughness_range;
-
-        // Optional
-        Texture2D *emissive_map;
-        glm::vec3 emissive_tint;
-
-        Sampler *sampler;
-
-        void setup() const override;
-        void deserialize(const nlohmann::json &data) override;
-    };
-
     // TexturedLitMaterial adds the following uniforms:
     // - Sampler2D
     //  - "albedo_map", "specular_map", "ambient_occlusion_map", "roughness_map", "emissive_map"(optional)
@@ -102,6 +79,7 @@ namespace our
         // Optional
         Texture2D *emissive_map;
         glm::vec3 emissive_tint;
+        float alphaThreshold;
 
         Sampler *sampler;
 

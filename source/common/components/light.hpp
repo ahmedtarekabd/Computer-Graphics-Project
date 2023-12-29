@@ -43,7 +43,7 @@ namespace our
         virtual void deserialize(const nlohmann::json &data) override;
 
         // Set uniform values for the shader
-        virtual void setUniforms();
+        virtual void setup();
     };
 
     //* Directional Types
@@ -53,9 +53,9 @@ namespace our
         // The direction of the light
         glm::vec3 direction;
 
-        static std::string getID() { return "DirectionalLight"; }
+        static std::string getID() { return "Directional Light"; }
         void deserialize(const nlohmann::json &data) override;
-        void setUniforms() override;
+        void setup() override;
     };
 
     //* Point Types
@@ -67,14 +67,14 @@ namespace our
         // Attenuation of the light
         glm::vec3 attenuation = glm::vec3(1.0f, 0.0f, 0.0f);
 
-        // The ID of this component type is "PointLight"
-        static std::string getID() { return "PointLight"; }
+        // The ID of this component type is "Point Light"
+        static std::string getID() { return "Point Light"; }
 
         // Reads light parameters from the given json object
         void deserialize(const nlohmann::json &data) override;
 
         // Set uniform values for the shader
-        void setUniforms() override;
+        void setup() override;
     };
 
     //* Spot Types
@@ -91,14 +91,14 @@ namespace our
         // Spot Light Angles
         float inner_angle = 0.0f, outer_angle = 0.0f;
 
-        // The ID of this component type is "SpotLight"
-        static std::string getID() { return "SpotLight"; }
+        // The ID of this component type is "Spot Light"
+        static std::string getID() { return "Spot Light"; }
 
         // Reads light parameters from the given json object
         void deserialize(const nlohmann::json &data) override;
 
         // Set uniform values for the shader
-        void setUniforms() override;
+        void setup() override;
     };
 
 }

@@ -1,36 +1,34 @@
 {
     "start-scene": "menu",
-    "window":
-    {
-        "title":"Default Game Window",
-        "size":{
-            "width":1280,
-            "height":720
+    "window": {
+        "title": "Default Game Window",
+        "size": {
+            "width": 1280,
+            "height": 720
         },
         "fullscreen": false
     },
     "scene": {
-        "renderer":{
+        "renderer": {
             "sky": "assets/textures/sky.jpg",
             "postprocess": "assets/shaders/postprocess/vignette.frag"
         },
-        "assets":{
-            "shaders":{
-                "lited":{
-                    "vs":"assets/shaders/lit.vert",
-                    "fs":"assets/shaders/lit.frag"
+        "assets": {
+            "shaders": {
+                "lited": {
+                    "vs": "assets/shaders/lit.vert",
+                    "fs": "assets/shaders/lit.frag"
                 },
-                "tinted":{
-                    "vs":"assets/shaders/tinted.vert",
-                    "fs":"assets/shaders/tinted.frag"
+                "tinted": {
+                    "vs": "assets/shaders/tinted.vert",
+                    "fs": "assets/shaders/tinted.frag"
                 },
-                "textured":{
-                    "vs":"assets/shaders/textured.vert",
-                    "fs":"assets/shaders/textured.frag"
+                "textured": {
+                    "vs": "assets/shaders/textured.vert",
+                    "fs": "assets/shaders/textured.frag"
                 }
             },
-            "textures":{
-
+            "textures": {
                 "concrete_color": "assets/textures/warehouse/concrete_color.png",
                 "concrete_met": "assets/textures/warehouse/concrete_met.png",
                 "concrete_nrm": "assets/textures/warehouse/concrete_nrm.png",
@@ -39,22 +37,22 @@
                 "floor_met": "assets/textures/warehouse/Floor_met.png",
                 "floor_nrm": "assets/textures/warehouse/Floor_nrm.png",
                 "floor_rough": "assets/textures/warehouse/Floor_rough.png",
-                "gates_color": "assets/textures/warehouse/gates_color.png",
-                "gates_met": "assets/textures/warehouse/gates_met.png",
-                "gates_nrm": "assets/textures/warehouse/gates_nrm.png",
-                "gates_rough": "assets/textures/warehouse/gates_rough.png",
-                "metal_color": "assets/textures/warehouse/Metal_color.png",
-                "metal_met": "assets/textures/warehouse/Metal_met.png",
-                "metal_nrm": "assets/textures/warehouse/Metal_nrm.png",
-                "metal_rough": "assets/textures/warehouse/Metal_rough.png",
-                "roof_color": "assets/textures/warehouse/roof_color.png",
-                "roof_met": "assets/textures/warehouse/roof_met.png",
-                "roof_nrm": "assets/textures/warehouse/roof_nrm.png",
-                "roof_rough": "assets/textures/warehouse/roof_rough.png",
-                "walls_color": "assets/textures/warehouse/walls_color.png",
-                "walls_met": "assets/textures/warehouse/walls_met.png",
-                "walls_nrm": "assets/textures/warehouse/walls_nrm.png",
-                "walls_rough": "assets/textures/warehouse/walls_rough.png",
+                // "gates_color": "assets/textures/warehouse/gates_color.png",
+                // "gates_met": "assets/textures/warehouse/gates_met.png",
+                // "gates_nrm": "assets/textures/warehouse/gates_nrm.png",
+                // "gates_rough": "assets/textures/warehouse/gates_rough.png",
+                // "metal_color": "assets/textures/warehouse/Metal_color.png",
+                // "metal_met": "assets/textures/warehouse/Metal_met.png",
+                // "metal_nrm": "assets/textures/warehouse/Metal_nrm.png",
+                // "metal_rough": "assets/textures/warehouse/Metal_rough.png",
+                // "roof_color": "assets/textures/warehouse/roof_color.png",
+                // "roof_met": "assets/textures/warehouse/roof_met.png",
+                // "roof_nrm": "assets/textures/warehouse/roof_nrm.png",
+                // "roof_rough": "assets/textures/warehouse/roof_rough.png",
+                // "walls_color": "assets/textures/warehouse/walls_color.png",
+                // "walls_met": "assets/textures/warehouse/walls_met.png",
+                // "walls_nrm": "assets/textures/warehouse/walls_nrm.png",
+                // "walls_rough": "assets/textures/warehouse/walls_rough.png",
 
                 "moon": "assets/textures/moon.jpg",
                 "grass": "assets/textures/grass_ground_d.jpg",
@@ -62,50 +60,52 @@
                 "glass": "assets/textures/glass-panels.png",
                 "monkey": "assets/textures/monkey.png"
             },
-            "meshes":{
+            "meshes": {
                 "warehouse": "assets/models/warehouse.obj",
-                "closed_gates": "assets/models/warehouse/closed_gates.obj",
-                "columns": "assets/models/warehouse/columns.obj",
                 "floor": "assets/models/warehouse/floor.obj",
-                "frames": "assets/models/warehouse/frames.obj",
-                "opened_gates": "assets/models/warehouse/opened_gates.obj",
-                "roof": "assets/models/warehouse/roof.obj",
-                "walls": "assets/models/warehouse/walls.obj",
+                // "closed_gates": "assets/models/warehouse/closed_gates.obj",
+                // "columns": "assets/models/warehouse/columns.obj",
+                // "frames": "assets/models/warehouse/frames.obj",
+                // "opened_gates": "assets/models/warehouse/opened_gates.obj",
+                // "roof": "assets/models/warehouse/roof.obj",
+                // "walls": "assets/models/warehouse/walls.obj",
                 "cube": "assets/models/cube.obj",
                 "plane": "assets/models/plane.obj",
                 "sphere": "assets/models/sphere.obj"
             },
-            "samplers":{
-                "default":{},
-                "pixelated":{
+            "samplers": {
+                "default": {},
+                "pixelated": {
                     "MAG_FILTER": "GL_NEAREST"
                 }
             },
-            "materials":{
-                "metal":{
+            "materials": {
+                "metal": {
                     "type": "tinted",
                     "shader": "tinted",
                     "pipelineState": {
-                        "faceCulling":{
+                        "faceCulling": {
                             "enabled": false
                         },
-                        "depthTesting":{
+                        "depthTesting": {
                             "enabled": true
                         }
                     },
                     "tint": [0.45, 0.4, 0.5, 1]
                 },
-                "glass":{
+                "glass": {
                     "type": "textured",
                     "shader": "textured",
+                    // "type": "lited",
+                    // "shader": "lited",
                     "pipelineState": {
-                        "faceCulling":{
+                        "faceCulling": {
                             "enabled": false
                         },
-                        "depthTesting":{
+                        "depthTesting": {
                             "enabled": true
                         },
-                        "blending":{
+                        "blending": {
                             "enabled": true,
                             "sourceFactor": "GL_SRC_ALPHA",
                             "destinationFactor": "GL_ONE_MINUS_SRC_ALPHA"
@@ -115,16 +115,19 @@
                     "transparent": true,
                     "tint": [1, 1, 1, 1],
                     "texture": "glass",
+                    // "albedo_map": "glass",
                     "sampler": "pixelated"
                 },
-                "grass":{
+                "grass": {
                     "type": "textured",
                     "shader": "textured",
+                    // "type": "lited",
+                    // "shader": "lited",
                     "pipelineState": {
-                        "faceCulling":{
+                        "faceCulling": {
                             "enabled": false
                         },
-                        "depthTesting":{
+                        "depthTesting": {
                             "enabled": true
                         }
                     },
@@ -132,55 +135,65 @@
                     "texture": "grass",
                     "sampler": "default"
                 },
-                "warehouse":{
-                    "type": "textured",
-                    "shader": "textured",
+                "warehouse": {
+                    // "type": "textured",
+                    // "shader": "textured",
+                    "type": "lited",
+                    "shader": "lited",
                     "pipelineState": {
-                        "faceCulling":{
+                        "faceCulling": {
                             "enabled": false
                         },
-                        "depthTesting":{
+                        "depthTesting": {
                             "enabled": true
                         }
                     },
                     "tint": [1, 1, 1, 1],
-                    "texture": "monkey",
+                    // "texture": "monkey",
+                    "albedo_map": "monkey",
                     "sampler": "default"
                 },
-                "floor":{
+                "floor": {
+                    // "type": "textured",
+                    // "shader": "textured",
                     "type": "lited",
                     "shader": "lited",
                     "pipelineState": {
-                        "faceCulling":{
+                        "faceCulling": {
                             "enabled": false
                         },
-                        "depthTesting":{
+                        "depthTesting": {
                             "enabled": true
                         }
                     },
                     "tint": [1, 1, 1, 1],
                     "albedo_map": "floor_color",
                     "roughness_map": "floor_rough",
+                    // "metallic_map": "floor_met",
+                    // "normal_map": "floor_nrm",
                     "sampler": "default"
                 },
-                "moon":{
+                "moon": {
                     "type": "textured",
                     "shader": "textured",
+                    // "type": "lited",
+                    // "shader": "lited",
                     "pipelineState": {
-                        "faceCulling":{
+                        "faceCulling": {
                             "enabled": false
                         },
-                        "depthTesting":{
+                        "depthTesting": {
                             "enabled": true
                         }
                     },
                     "tint": [1, 1, 1, 1],
                     "texture": "moon",
+                    "albedo_map": "moon",
                     "sampler": "default"
                 }
             }
         },
-        "world":[
+        "world": [
             {
                 "position": [0, 0, 10],
                 "components": [
@@ -206,6 +219,25 @@
                     }
                 ]
             },
+            // {
+            //     // ! parent
+            //     "name": "Directional light",
+            //     "position": [1, 1, 1],
+            //     "rotation": [0, -1, 0],
+            //     // "scale": [0.001, 0.001, 0.001],
+            //     "components": [
+            //         // {
+            //         //     "type": "Mesh Renderer",
+            //         //     "mesh": "cube",
+            //         //     "material": "glass"
+            //         // },
+            //         {
+            //             "type": "Directional Light",
+            //             "color": [0.8, 0.8, 0.8]
+            //             // "direction": [1.0, 0.0, 0.0]
+            //         }
+            //     ]
+            // },
             {
                 "position": [0, -1, 0],
                 "rotation": [0, 0, 0],
@@ -213,7 +245,7 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "floor",
-                        "material": "warehouse"
+                        "material": "floor"
                     }
                 ]
             },
