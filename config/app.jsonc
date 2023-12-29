@@ -37,22 +37,22 @@
                 "floor_met": "assets/textures/warehouse/Floor_met.png",
                 "floor_nrm": "assets/textures/warehouse/Floor_nrm.png",
                 "floor_rough": "assets/textures/warehouse/Floor_rough.png",
-                // "gates_color": "assets/textures/warehouse/gates_color.png",
-                // "gates_met": "assets/textures/warehouse/gates_met.png",
-                // "gates_nrm": "assets/textures/warehouse/gates_nrm.png",
-                // "gates_rough": "assets/textures/warehouse/gates_rough.png",
-                // "metal_color": "assets/textures/warehouse/Metal_color.png",
-                // "metal_met": "assets/textures/warehouse/Metal_met.png",
-                // "metal_nrm": "assets/textures/warehouse/Metal_nrm.png",
-                // "metal_rough": "assets/textures/warehouse/Metal_rough.png",
-                // "roof_color": "assets/textures/warehouse/roof_color.png",
-                // "roof_met": "assets/textures/warehouse/roof_met.png",
-                // "roof_nrm": "assets/textures/warehouse/roof_nrm.png",
-                // "roof_rough": "assets/textures/warehouse/roof_rough.png",
-                // "walls_color": "assets/textures/warehouse/walls_color.png",
-                // "walls_met": "assets/textures/warehouse/walls_met.png",
-                // "walls_nrm": "assets/textures/warehouse/walls_nrm.png",
-                // "walls_rough": "assets/textures/warehouse/walls_rough.png",
+                "gates_color": "assets/textures/warehouse/gates_color.png",
+                "gates_met": "assets/textures/warehouse/gates_met.png",
+                "gates_nrm": "assets/textures/warehouse/gates_nrm.png",
+                "gates_rough": "assets/textures/warehouse/gates_rough.png",
+                "metal_color": "assets/textures/warehouse/Metal_color.png",
+                "metal_met": "assets/textures/warehouse/Metal_met.png",
+                "metal_nrm": "assets/textures/warehouse/Metal_nrm.png",
+                "metal_rough": "assets/textures/warehouse/Metal_rough.png",
+                "roof_color": "assets/textures/warehouse/roof_color.png",
+                "roof_met": "assets/textures/warehouse/roof_met.png",
+                "roof_nrm": "assets/textures/warehouse/roof_nrm.png",
+                "roof_rough": "assets/textures/warehouse/roof_rough.png",
+                "walls_color": "assets/textures/warehouse/walls_color.png",
+                "walls_met": "assets/textures/warehouse/walls_met.png",
+                "walls_nrm": "assets/textures/warehouse/walls_nrm.png",
+                "walls_rough": "assets/textures/warehouse/walls_rough.png",
 
                 "moon": "assets/textures/moon.jpg",
                 "grass": "assets/textures/grass_ground_d.jpg",
@@ -63,12 +63,12 @@
             "meshes": {
                 "warehouse": "assets/models/warehouse.obj",
                 "floor": "assets/models/warehouse/floor.obj",
-                // "closed_gates": "assets/models/warehouse/closed_gates.obj",
-                // "columns": "assets/models/warehouse/columns.obj",
-                // "frames": "assets/models/warehouse/frames.obj",
-                // "opened_gates": "assets/models/warehouse/opened_gates.obj",
-                // "roof": "assets/models/warehouse/roof.obj",
-                // "walls": "assets/models/warehouse/walls.obj",
+                "closed_gates": "assets/models/warehouse/closed_gates.obj",
+                "columns": "assets/models/warehouse/columns.obj",
+                "frames": "assets/models/warehouse/frames.obj",
+                "opened_gates": "assets/models/warehouse/opened_gates.obj",
+                "roof": "assets/models/warehouse/roof.obj",
+                "walls": "assets/models/warehouse/walls.obj",
                 "cube": "assets/models/cube.obj",
                 "plane": "assets/models/plane.obj",
                 "sphere": "assets/models/sphere.obj"
@@ -153,6 +153,26 @@
                     "albedo_map": "monkey",
                     "sampler": "default"
                 },
+                "concrete": {
+                    // "type": "textured",
+                    // "shader": "textured",
+                    "type": "lited",
+                    "shader": "lited",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [1, 1, 1, 1],
+                    "albedo_map": "concrete_color",
+                    "roughness_map": "concrete_rough",
+                    // "metallic_map": "concrete_met",
+                    // "normal_map": "concrete_nrm",
+                    "sampler": "default"
+                },
                 "floor": {
                     // "type": "textured",
                     // "shader": "textured",
@@ -171,6 +191,86 @@
                     "roughness_map": "floor_rough",
                     // "metallic_map": "floor_met",
                     // "normal_map": "floor_nrm",
+                    "sampler": "default"
+                },
+                "gates": {
+                    // "type": "textured",
+                    // "shader": "textured",
+                    "type": "lited",
+                    "shader": "lited",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [1, 1, 1, 1],
+                    "albedo_map": "gates_color",
+                    "roughness_map": "gates_rough",
+                    // "metallic_map": "gates_met",
+                    // "normal_map": "gates_nrm",
+                    "sampler": "default"
+                },
+                "Metal": {
+                    // "type": "textured",
+                    // "shader": "textured",
+                    "type": "lited",
+                    "shader": "lited",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [1, 1, 1, 1],
+                    "albedo_map": "Metal_color",
+                    "roughness_map": "Metal_rough",
+                    // "metallic_map": "Metal_met",
+                    // "normal_map": "Metal_nrm",
+                    "sampler": "default"
+                },
+                "roof": {
+                    // "type": "textured",
+                    // "shader": "textured",
+                    "type": "lited",
+                    "shader": "lited",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [1, 1, 1, 1],
+                    "albedo_map": "roof_color",
+                    "roughness_map": "roof_rough",
+                    // "metallic_map": "roof_met",
+                    // "normal_map": "roof_nrm",
+                    "sampler": "default"
+                },
+                "walls": {
+                    // "type": "textured",
+                    // "shader": "textured",
+                    "type": "lited",
+                    "shader": "lited",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [1, 1, 1, 1],
+                    "albedo_map": "walls_color",
+                    "roughness_map": "walls_rough",
+                    // "metallic_map": "walls_met",
+                    // "normal_map": "walls_nrm",
                     "sampler": "default"
                 },
                 "moon": {
@@ -244,8 +344,63 @@
                 "components": [
                     {
                         "type": "Mesh Renderer",
+                        "mesh": "concrete",
+                        "material": "concrete"
+                    }
+                ]
+            },
+            {
+                "position": [0, -1, 0],
+                "rotation": [0, 0, 0],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
                         "mesh": "floor",
                         "material": "floor"
+                    }
+                ]
+            },
+            {
+                "position": [0, -1, 0],
+                "rotation": [0, 0, 0],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "gates",
+                        "material": "gates"
+                    }
+                ]
+            },
+            {
+                "position": [0, -1, 0],
+                "rotation": [0, 0, 0],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "Metal",
+                        "material": "Metal"
+                    }
+                ]
+            },
+            {
+                "position": [0, -1, 0],
+                "rotation": [0, 0, 0],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "roof",
+                        "material": "roof"
+                    }
+                ]
+            },
+            {
+                "position": [0, -1, 0],
+                "rotation": [0, 0, 0],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "walls",
+                        "material": "walls"
                     }
                 ]
             },
