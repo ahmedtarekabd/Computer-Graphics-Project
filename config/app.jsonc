@@ -387,7 +387,7 @@
         "world": [
             {
                 "name": "player",
-                "position": [0, 0, 5],
+                "position": [-4, 1, 5],
                 "components": [
                     {
                         "type": "Camera"
@@ -436,44 +436,83 @@
                 "name": "Light",
                 "position": [1, 1, 1],
                 "rotation": [0, -1, 0],
-                // "scale": [0.001, 0.001, 0.001],
                 "components": [
-                    // {
-                    //     "type": "Mesh Renderer",
-                    //     "mesh": "cube",
-                    //     "material": "glass"
-                    // },
                     {
                         "type": "Directional Light",
                         "diffuse": [0.2, 0.2, 0.2],
                         "specular": [0.1, 0.1, 0.1],
                         "ambient": [0.1, 0.1, 0.1]
-                        // "direction": [1.0, 0.0, 0.0]
                     }
                 ]
             },
             {
+                // Left Back
                 "name": "Light",
-                "position": [-5, 5, 1],
+                "position": [-45, 4, 15],
                 "rotation": [0, -1, 0],
                 "components": [
                     {
                         "type": "Point Light",
-                        "diffuse": [1.0, 0.5, 0.5],
-                        "specular": [0.3, 0.3, 0.3],
-                        "ambient": [0.6, 0.6, 0.6],
+                        "diffuse": [0.6, 0.2, 0.2],
+                        "specular": [0.1, 0.1, 0.1],
+                        "ambient": [1.0, 0.5, 0.5],
+                        "attenuation": [0.01, 0.01, 0.01]
+                    }
+                ]
+            },
+            {
+                // Left Center
+                "name": "Light",
+                "position": [-45, 7, 0],
+                "rotation": [0, -1, 0],
+                "components": [
+                    {
+                        "type": "Point Light",
+                        "diffuse": [0.6, 0.2, 0.2],
+                        "specular": [0.1, 0.1, 0.1],
+                        "ambient": [1.0, 0.5, 0.5],
+                        "attenuation": [0.01, 0.01, 0.01]
+                    }
+                ]
+            },
+            {
+                // Left Center
+                "name": "Light",
+                "position": [-4, 5, 0],
+                "rotation": [0, -1, 0],
+                "components": [
+                    {
+                        "type": "Point Light",
+                        "diffuse": [0.4, 0.2, 0.2],
+                        "specular": [0.1, 0.1, 0.1],
+                        "ambient": [0.4, 0.4, 0.4],
+                        "attenuation": [0.01, 0.01, 0.01]
+                    }
+                ]
+            },
+            {
+                // Left Front
+                "name": "Light",
+                "position": [-45, 4, -15],
+                "rotation": [0, -1, 0],
+                "components": [
+                    {
+                        "type": "Point Light",
+                        "diffuse": [0.6, 0.2, 0.2],
+                        "specular": [0.1, 0.1, 0.1],
+                        "ambient": [1.0, 0.5, 0.5],
                         "attenuation": [0.01, 0.01, 0.01]
                     }
                 ]
             },
             {
                 "name": "Light",
-                "position": [20, 5, 1],
-                "rotation": [-1, -1, 0],
+                "position": [45, 2, 15],
+                "rotation": [-1, 0, 0],
                 "components": [
                     {
                         "type": "Spot Light",
-                        "diffuse": [0.5, 1.0, 0.5],
+                        "diffuse": [1.0, 0.5, 0.5],
                         "specular": [0.3, 0.3, 0.3],
                         "ambient": [0.6, 0.6, 0.6],
                         "attenuation": [0.02, 0.02, 0.02],
@@ -494,8 +533,8 @@
                 ]
             },
             {
-                "name": "monster",
-                "position": [0, -1, -2],
+                "name": "not monster",
+                "position": [-4, -1, 0],
                 "rotation": [0, 0, 0],
                 "scale": [0.22, 0.22, 0.22],
                 "components": [
@@ -515,71 +554,23 @@
                     }
                 ]
             },
-            {
-                "position": [2, 0, -6],
-                "rotation": [0, 180, 0],
-                "scale": [0.003, 0.003, 0.003],
-                "components": [
-                    {
-                        "type": "Mesh Renderer",
-                        "mesh": "ghost",
-                        "material": "ghost"
-                    },
-                    {
-                        "type": "Movement",
-                        "linearVelocity": [0, 0, 0] //,
-                        // "angularVelocity": [0, 45, 0]
-                    }
-                ]
-            },
-            // // {
-            // //     "position": [10, 4, 0],
-            // //     "rotation": [0, -90, 0],
-            // //     "scale": [10, 5, 1],
-            // //     "components": [
-            // //         {
-            // //             "type": "Mesh Renderer",
-            // //             "mesh": "plane",
-            // //             "material": "wall"
-            // //         }
-            // //     ]
-            // // },
-            // // {
-            // //     "position": [0, 4, -10],
-            // //     "rotation": [0, 0, 0],
-            // //     "scale": [10, 5, 1],
-            // //     "components": [
-            // //         {
-            // //             "type": "Mesh Renderer",
-            // //             "mesh": "plane",
-            // //             "material": "wall"
-            // //         }
-            // //     ]
-            // // },
-            // // {
-            // //     "position": [0, 4, 10],
-            // //     "rotation": [0, 0, 0],
-            // //     "scale": [10, 5, 1],
-            // //     "components": [
-            // //         {
-            // //             "type": "Mesh Renderer",
-            // //             "mesh": "plane",
-            // //             "material": "wall"
-            // //         }
-            // //     ]
-            // // },
-            // // {
-            // //     "position": [-10, 4, 0],
-            // //     "rotation": [0, -90, 0],
-            // //     "scale": [10, 5, 1],
-            // //     "components": [
-            // //         {
-            // //             "type": "Mesh Renderer",
-            // //             "mesh": "plane",
-            // //             "material": "wall"
-            // //         }
-            // //     ]
-            // // },
+            // {
+            //     "position": [2, 0, -6],
+            //     "rotation": [0, 180, 0],
+            //     "scale": [0.003, 0.003, 0.003],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "ghost",
+            //             "material": "ghost"
+            //         },
+            //         {
+            //             "type": "Movement",
+            //             "linearVelocity": [0, 0, 0] //,
+            //             // "angularVelocity": [0, 45, 0]
+            //         }
+            //     ]
+            // },
             {
                 "position": [0, -1, 0],
                 "rotation": [0, 0, 0],

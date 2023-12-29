@@ -10,41 +10,41 @@
 #include <functional>
 #include <array>
 
-// This struct is used to store the location and size of a button and the code it should execute when clicked
-struct Button
+// // This struct is used to store the location and size of a button and the code it should execute when clicked
+// struct Button
+// {
+//     // The position (of the top-left corner) of the button and its size in pixels
+//     glm::vec2 position, size;
+//     // The function that should be excuted when the button is clicked. It takes no arguments and returns nothing.
+//     std::function<void()> action;
+
+//     // This function returns true if the given vector v is inside the button. Otherwise, false is returned.
+//     // This is used to check if the mouse is hovering over the button.
+//     bool isInside(const glm::vec2 &v) const
+//     {
+//         return position.x <= v.x && position.y <= v.y &&
+//                v.x <= position.x + size.x &&
+//                v.y <= position.y + size.y;
+//     }
+
+//     // This function returns the local to world matrix to transform a rectangle of size 1x1
+//     // (and whose top-left corner is at the origin) to be the button.
+//     glm::mat4 getLocalToWorld() const
+//     {
+//         return glm::translate(glm::mat4(1.0f), glm::vec3(position.x, position.y, 0.0f)) *
+//                glm::scale(glm::mat4(1.0f), glm::vec3(size.x, size.y, 1.0f));
+//     }
+// };
+
+// This state shows how to use some of the abstractions we created to make a exit.
+class Exitstate : public our::State
 {
-    // The position (of the top-left corner) of the button and its size in pixels
-    glm::vec2 position, size;
-    // The function that should be excuted when the button is clicked. It takes no arguments and returns nothing.
-    std::function<void()> action;
 
-    // This function returns true if the given vector v is inside the button. Otherwise, false is returned.
-    // This is used to check if the mouse is hovering over the button.
-    bool isInside(const glm::vec2 &v) const
-    {
-        return position.x <= v.x && position.y <= v.y &&
-               v.x <= position.x + size.x &&
-               v.y <= position.y + size.y;
-    }
-
-    // This function returns the local to world matrix to transform a rectangle of size 1x1
-    // (and whose top-left corner is at the origin) to be the button.
-    glm::mat4 getLocalToWorld() const
-    {
-        return glm::translate(glm::mat4(1.0f), glm::vec3(position.x, position.y, 0.0f)) *
-               glm::scale(glm::mat4(1.0f), glm::vec3(size.x, size.y, 1.0f));
-    }
-};
-
-// This state shows how to use some of the abstractions we created to make a menu.
-class Menustate : public our::State
-{
-
-    // A meterial holding the menu shader and the menu texture to draw
-    our::TexturedMaterial *menuMaterial;
+    // A meterial holding the exit shader and the exit texture to draw
+    our::TexturedMaterial *exitMaterial;
     // A material to be used to highlight hovered buttons (we will use blending to create a negative effect).
     our::TintedMaterial *highlightMaterial;
-    // A rectangle mesh on which the menu material will be drawn
+    // A rectangle mesh on which the exit material will be drawn
     our::Mesh *rectangle;
     // A variable to record the time since the state is entered (it will be used for the fading effect).
     float time;
@@ -53,17 +53,17 @@ class Menustate : public our::State
 
     void onInitialize() override
     {
-        // First, we create a material for the menu's background
-        menuMaterial = new our::TexturedMaterial();
+        // First, we create a material for the exit's background
+        exitMaterial = new our::TexturedMaterial();
         // Here, we load the shader that will be used to draw the background
-        menuMaterial->shader = new our::ShaderProgram();
-        menuMaterial->shader->attach("assets/shaders/textured.vert", GL_VERTEX_SHADER);
-        menuMaterial->shader->attach("assets/shaders/textured.frag", GL_FRAGMENT_SHADER);
-        menuMaterial->shader->link();
-        // Then we load the menu texture
-        menuMaterial->texture = our::texture_utils::loadImage("assets/textures/menu.png");
-        // Initially, the menu material will be black, then it will fade in
-        menuMaterial->tint = glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
+        exitMaterial->shader = new our::ShaderProgram();
+        exitMaterial->shader->attach("assets/shaders/textured.vert", GL_VERTEX_SHADER);
+        exitMaterial->shader->attach("assets/shaders/textured.frag", GL_FRAGMENT_SHADER);
+        exitMaterial->shader->link();
+        // Then we load the exit texture
+        exitMaterial->texture = our::texture_utils::loadImage("assets/textures/exit.png");
+        // Initially, the exit material will be black, then it will fade in
+        exitMaterial->tint = glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
 
         // Second, we create a material to highlight the hovered buttons
         highlightMaterial = new our::TintedMaterial();
@@ -102,7 +102,7 @@ class Menustate : public our::State
         // Reset the time elapsed since the state is entered.
         time = 0;
 
-        // Fill the positions, sizes and actions for the menu buttons
+        // Fill the positions, sizes and actions for the exit buttons
         // Note that we use lambda expressions to set the actions of the buttons.
         // A lambda expression consists of 3 parts:
         // - The capture list [] which is the variables that the lambda should remember because it will use them during execution.
@@ -110,13 +110,13 @@ class Menustate : public our::State
         // - The argument list () which is the arguments that the lambda should receive when it is called.
         //      We leave it empty since button actions receive no input.
         // - The body {} which contains the code to be executed.
-        buttons[0].position = {42.0f, 565.0f};
-        buttons[0].size = {450.0f, 50.0f};
+        buttons[0].position = {40.0f, 480.0f};
+        buttons[0].size = {310.0f, 70.0f};
         buttons[0].action = [this]()
         { this->getApp()->changeState("play"); };
 
-        buttons[1].position = {42.0f, 633.0f};
-        buttons[1].size = {400.0f, 50.0f};
+        buttons[1].position = {40.0f, 560.0f};
+        buttons[1].size = {115.0f, 70.0f};
         buttons[1].action = [this]()
         { this->getApp()->close(); };
     }
@@ -142,7 +142,7 @@ class Menustate : public our::State
         glm::vec2 mousePosition = mouse.getMousePosition();
 
         // If the mouse left-button is just pressed, check if the mouse was inside
-        // any menu button. If it was inside a menu button, run the action of the button.
+        // any exit button. If it was inside a exit button, run the action of the button.
         if (mouse.justPressed(0))
         {
             for (auto &button : buttons)
@@ -163,18 +163,18 @@ class Menustate : public our::State
         // Note that the top is at 0.0 and the bottom is at the framebuffer height. This allows us to consider the top-left
         // corner of the window to be the origin which makes dealing with the mouse input easier.
         glm::mat4 VP = glm::ortho(0.0f, (float)size.x, (float)size.y, 0.0f, 1.0f, -1.0f);
-        // The local to world (model) matrix of the background which is just a scaling matrix to make the menu cover the whole
+        // The local to world (model) matrix of the background which is just a scaling matrix to make the exit cover the whole
         // window. Note that we defind the scale in pixels.
         glm::mat4 M = glm::scale(glm::mat4(1.0f), glm::vec3(size.x, size.y, 1.0f));
 
         // First, we apply the fading effect.
         time += (float)deltaTime;
-        menuMaterial->tint = glm::vec4(glm::smoothstep(0.00f, 2.00f, time));
-        // Then we render the menu background
-        // Notice that I don't clear the screen first, since I assume that the menu rectangle will draw over the whole
+        exitMaterial->tint = glm::vec4(glm::smoothstep(0.00f, 2.00f, time));
+        // Then we render the exit background
+        // Notice that I don't clear the screen first, since I assume that the exit rectangle will draw over the whole
         // window anyway.
-        menuMaterial->setup();
-        menuMaterial->shader->set("transform", VP * M);
+        exitMaterial->setup();
+        exitMaterial->shader->set("transform", VP * M);
         rectangle->draw();
 
         // For every button, check if the mouse is inside it. If the mouse is inside, we draw the highlight rectangle over it.
@@ -193,9 +193,9 @@ class Menustate : public our::State
     {
         // Delete all the allocated resources
         delete rectangle;
-        delete menuMaterial->texture;
-        delete menuMaterial->shader;
-        delete menuMaterial;
+        delete exitMaterial->texture;
+        delete exitMaterial->shader;
+        delete exitMaterial;
         delete highlightMaterial->shader;
         delete highlightMaterial;
     }

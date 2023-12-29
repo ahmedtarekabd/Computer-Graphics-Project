@@ -77,6 +77,10 @@ class Playstate : public our::State
         cameraController.exit();
         // Clear the world
         world.clear();
+
+        // Change state to exit state
+        getApp()->changeState("exit");
+
         // and we delete all the loaded assets to free memory on the RAM and the VRAM
         our::clearAllAssets();
     }
