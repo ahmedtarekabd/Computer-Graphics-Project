@@ -1,6 +1,6 @@
 # Blender v2.90.0 OBJ File: 'Shotgun_Model.blend'
 # www.blender.org
-mtllib Shotgun_Model.mtl
+#mtllib Shotgun_Model.mtl
 o Body_lowpoly_Cube.073
 v -0.151773 0.208720 0.007511
 v -0.121613 0.206860 0.014335
