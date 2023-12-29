@@ -4,6 +4,7 @@
 #include "camera.hpp"
 #include "mesh-renderer.hpp"
 #include "free-camera-controller.hpp"
+#include "light.hpp"
 #include "movement.hpp"
 #include "Collision.hpp"
 
@@ -36,6 +37,18 @@ namespace our
         else if (type == CollisionComponent::getID())
         {
             component = entity->addComponent<CollisionComponent>();
+        else if (type == DirectionalLight::getID())
+        {
+            std::cout << "Directional Light" << std::endl;
+            component = entity->addComponent<DirectionalLight>();
+        }
+        else if (type == PointLight::getID())
+        {
+            component = entity->addComponent<PointLight>();
+        }
+        else if (type == SpotLight::getID())
+        {
+            component = entity->addComponent<SpotLight>();
         }
         if (component)
             component->deserialize(data);
