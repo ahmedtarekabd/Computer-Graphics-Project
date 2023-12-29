@@ -37,6 +37,7 @@ namespace our
         else if (type == CollisionComponent::getID())
         {
             component = entity->addComponent<CollisionComponent>();
+        }
         else if (type == DirectionalLight::getID())
         {
             std::cout << "Directional Light" << std::endl;
