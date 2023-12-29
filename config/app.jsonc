@@ -212,7 +212,7 @@
         "world":[
             {
                 "name":"player",
-                "position": [0, 0, 5],
+                "position": [0, 0, 12],
                 "components": [
                     {
                         "type": "Camera"
@@ -222,8 +222,7 @@
                     },
                     {
                         "type":"Collision"
-                        // "CollisionRadius": "1"
-                    }
+                    }      
                 ],
                 "children": [
                     {
@@ -252,6 +251,9 @@
                                 "type": "Mesh Renderer",
                                 "mesh": "plane",
                                 "material": "metal"
+                            },
+                            {
+                                "type":"Collision"
                             }
                         ]
                     }
@@ -259,7 +261,7 @@
             },
             {
                 "name":"monster",
-                "position": [0, -1, -2],
+                "position": [-6, -1, -8],
                 "rotation": [0, 0, 0],
                 "scale": [0.22, 0.22, 0.22],
                 "components": [
@@ -271,110 +273,82 @@
                     },
                     {
                         "type": "Movement",
-                        "linearVelocity": [0, 0, 0]//,
+                        "linearVelocity": [0, 0, 0.1]//,
                        // "angularVelocity": [0, 45, 0]
                     },
                     {
-                        "type":"Collision",
-                        "CollisionRadius": 2
+                        "type":"Collision"
                     }
                 ]
             },            
-            // {
-            //     "name":"monster",
-            //     "position": [2, -1, -2],
-            //     "rotation": [0, 0, 0],
-            //     "scale": [0.25, 0.25, 0.25],
-            //     "components": [
-            //         {
-            //             "type": "Mesh Renderer",
-            //             "mesh": "monster",
-            //             "material": "monster"
-            //             //monster height:15
-            //             //monster width:7
-            //         },
-            //         {
-            //             "type": "Movement",
-            //             "linearVelocity": [0, 0, 0]//,
-            //            // "angularVelocity": [0, 45, 0]
-            //         },
-            //         {
-            //             "type":"Collision"
-                    
-            //         }
-            //     ]
-            // },
             {
-                "position": [2, -1, -2],
+                "name":"monster",
+                "position": [-2, -1, -8],
                 "rotation": [0, 0, 0],
-                "scale": [0.1, 0.1, 0.1],
+                "scale": [0.22, 0.22, 0.22],
                 "components": [
                     {
                         "type": "Mesh Renderer",
-                        "mesh": "sphere",
-                        "material": "metal"
-                    }
-                ]
-            },
-            {
-                "position": [2, 0, -6],
-                "rotation": [0, 180, 0],
-                "scale": [0.003, 0.003, 0.003],
-                "components": [
-                    {
-                        "type": "Mesh Renderer",
-                        "mesh": "ghost",
-                        "material": "ghost"
+                        "mesh": "monster",
+                        "material": "monster"
+
                     },
                     {
                         "type": "Movement",
-                        "linearVelocity": [0, 0, 0]//,
-                       // "angularVelocity": [0, 45, 0]
-                    }
-                ]
-            },
-            {
-                "position": [10, 4, 0],
-                "rotation": [0, -90, 0],
-                "scale": [10, 5, 1],
-                "components": [
+                        "linearVelocity": [0, 0, 1]  
+                    },
                     {
-                        "type": "Mesh Renderer",
-                        "mesh": "plane",
-                        "material": "wall"
+                        "type":"Collision"
                     }
                 ]
-            },
+            },  
             {
-                "position": [0, 4, -10],
+                "name":"monster",
+                "position": [2, -1, -8],
                 "rotation": [0, 0, 0],
-                "scale": [10, 5, 1],
+                "scale": [0.22, 0.22, 0.22],
                 "components": [
                     {
                         "type": "Mesh Renderer",
-                        "mesh": "plane",
-                        "material": "wall"
+                        "mesh": "monster",
+                        "material": "monster"
+                    },
+                    {
+                        "type": "Movement",
+                        "linearVelocity": [0, 0, 1]
+                    },
+                    {
+                        "type":"Collision"
                     }
                 ]
             },
             {
-                "position": [0, 4, 10],
+                "name":"monster",
+                "position": [6, -1, -8],
                 "rotation": [0, 0, 0],
-                "scale": [10, 5, 1],
+                "scale": [0.22, 0.22, 0.22],
                 "components": [
                     {
                         "type": "Mesh Renderer",
-                        "mesh": "plane",
-                        "material": "wall"
+                        "mesh": "monster",
+                        "material": "monster"
+                    },
+                    {
+                        "type": "Movement",
+                        "linearVelocity": [0, 0, 1]
+                    },
+                    {
+                        "type":"Collision"
                     }
                 ]
             },
             {
-                "position": [-10, 4, 0],
+                "position": [11, 7, 0],
                 "rotation": [0, -90, 0],
-                "scale": [10, 5, 1],
+                "scale": [15, 8, 1],
                 "components": [
                     {
+                        ///right wall
                         "type": "Mesh Renderer",
                         "mesh": "plane",
                         "material": "wall"
@@ -382,29 +356,77 @@
                 ]
             },
             {
-                "position": [0, 9, 0],
-                "rotation": [-90, 0, 0],
-                "scale": [10, 10, 1],
+                "position": [0,7, -15],
+                "rotation": [0, 0, 0],
+                "scale": [11, 8, 1],
                 "components": [
                     {
+                        ///front wall
                         "type": "Mesh Renderer",
                         "mesh": "plane",
-                        "material": "glass"
+                        "material": "wall"
+                    }
+                ]
+            },
+            {
+                "position": [0, 7, 15],
+                "rotation": [0, 0, 0],
+                "scale": [11, 8, 1],
+                "components": [
+                    {
+                        //back wall
+                        "type": "Mesh Renderer",
+                        "mesh": "plane",
+                        "material": "wall"
+                    }
+                ]
+            },
+            {
+                "position": [-11, 7, 0],
+                "rotation": [0, -90, 0],
+                "scale": [15, 8, 1],
+                "components": [
+                    {
+                        ///left wall
+                        "type": "Mesh Renderer",
+                        "mesh": "plane",
+                        "material": "wall"
                     }
                 ]
             },
             {
                 "position": [0, -1, 0],
                 "rotation": [-90, 0, 0],
-                "scale": [10, 10, 1],
+                "scale": [11, 15, 1],
                 "components": [
                     {
+                        //floor
                         "type": "Mesh Renderer",
                         "mesh": "plane",
                         "material": "asphalt"
                     }
                 ]
-            }//,
+            },
+            {
+                "name":"no",
+                "position": [-20, -1, -6],
+                "rotation": [0, 0, 0],
+                "scale": [0.1, 0.1, 0.1],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "monster",
+                        "material": "monster"
+
+                    },
+                    {
+                        "type": "Movement",
+                        "linearVelocity": [0, 0, 0]//,
+                       // "angularVelocity": [0, 45, 0]
+                    }
+                    
+                ]
+            }        
             // {
             //     "position": [0, 1, 2],
             //     "rotation": [0, 0, 0],

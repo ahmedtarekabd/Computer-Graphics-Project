@@ -1,7 +1,7 @@
 # 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
 # File Created: 06.10.2018 12:13:11
 
-mtllib ghost_by_dommk.mtl
+#mtllib ghost_by_dommk.mtl
 
 #
 # object Group58971

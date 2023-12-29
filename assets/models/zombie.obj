@@ -1,7 +1,7 @@
 # 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
 # File Created: 12.11.2018 19:46:00
 
-mtllib zombie_full.mtl
+#mtllib zombie_full.mtl
 
 #
 # object default
