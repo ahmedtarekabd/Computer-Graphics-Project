@@ -1,131 +1,79 @@
 {
     "start-scene": "renderer-test",
-    "window": {
-        "title": "Postprocess Test Window",
-        "size": {
-            "width": 1024,
-            "height": 512
+    "window":
+    {
+        "title":"Postprocess Test Window",
+        "size":{
+            "width":1024,
+            "height":512
         },
         "fullscreen": false
     },
-    "screenshots": {
+    "screenshots":{
         "directory": "screenshots/postprocess-test",
-        "requests": [{ "file": "test-0.png", "frame": 1 }]
+        "requests": [
+            { "file": "test-0.png", "frame":  1 }
+        ]
     },
     "scene": {
         "renderer": {
             "sky": "assets/textures/sky.jpg",
-            "postprocess": "assets/shaders/postprocess/vignette.frag"
+            "postprocess": "assets/shaders/postprocess/grayscale.frag"
         },
-        "lighting": {
-            "shader": "lited"
-        },
-        "assets": {
-            "shaders": {
-                "lited": {
-                    "vs": "assets/shaders/lit.vert",
-                    "fs": "assets/shaders/lit.frag"
+        "assets":{
+            "shaders":{
+                "tinted":{
+                    "vs":"assets/shaders/tinted.vert",
+                    "fs":"assets/shaders/tinted.frag"
                 },
-                "tinted": {
-                    "vs": "assets/shaders/tinted.vert",
-                    "fs": "assets/shaders/tinted.frag"
-                },
-                "textured": {
-                    "vs": "assets/shaders/textured.vert",
-                    "fs": "assets/shaders/textured.frag"
+                "textured":{
+                    "vs":"assets/shaders/textured.vert",
+                    "fs":"assets/shaders/textured.frag"
                 }
             },
-            "textures": {
-                "concrete_color": "assets/textures/warehouse/concrete_color.png",
-                "concrete_met": "assets/textures/warehouse/concrete_met.png",
-                "concrete_nrm": "assets/textures/warehouse/concrete_nrm.png",
-                "concrete_rough": "assets/textures/warehouse/concrete_rough.png",
-                "floor_color": "assets/textures/warehouse/Floor_Color.png",
-                "floor_met": "assets/textures/warehouse/Floor_met.png",
-                "floor_nrm": "assets/textures/warehouse/Floor_nrm.png",
-                "floor_rough": "assets/textures/warehouse/Floor_rough.png",
-                "gates_color": "assets/textures/warehouse/gates_color.png",
-                "gates_met": "assets/textures/warehouse/gates_met.png",
-                "gates_nrm": "assets/textures/warehouse/gates_nrm.png",
-                "gates_rough": "assets/textures/warehouse/gates_rough.png",
-                "metal_color": "assets/textures/warehouse/Metal_color.png",
-                "metal_met": "assets/textures/warehouse/Metal_met.png",
-                "metal_nrm": "assets/textures/warehouse/Metal_nrm.png",
-                "metal_rough": "assets/textures/warehouse/Metal_rough.png",
-                "roof_color": "assets/textures/warehouse/roof_color.png",
-                "roof_met": "assets/textures/warehouse/roof_met.png",
-                "roof_nrm": "assets/textures/warehouse/roof_nrm.png",
-                "roof_rough": "assets/textures/warehouse/roof_rough.png",
-                "walls_color": "assets/textures/warehouse/walls_color.png",
-                "walls_met": "assets/textures/warehouse/walls_met.png",
-                "walls_nrm": "assets/textures/warehouse/walls_nrm.png",
-                "walls_rough": "assets/textures/warehouse/walls_rough.png",
-
-                // "moon": "assets/textures/moon.jpg",
+            "textures":{
+                "moon": "assets/textures/moon.jpg",
                 "grass": "assets/textures/grass_ground_d.jpg",
                 "wood": "assets/textures/wood.jpg",
-                "glass": "assets/textures/glass-panels.png",
-                // "monkey": "assets/textures/monkey.png",
-                "weapon": "assets/textures/Shotgun_HDRP_BaseMap.png",
-                "monster": "assets/textures/lava.png",
-                "wall": "assets/textures/wall.jpg",
-                "asphalt": "assets/textures/black-road-texture.jpg",
-                "ghost": "assets/textures/78045.jpg",
-                "zombie_color": "assets/textures/zombie/Zombie_defaultMat_AlbedoTransparency.png",
-                "zombie_emmision": "assets/textures/zombie/Zombie_defaultMat_Emission.png",
-                "zombie_nrm": "assets/textures/zombie/Zombie_defaultMat_Normal.png",
-                "zombie_rough": "assets/textures/zombie/Zombie_defaultMat_SpecularSmoothness.png"
+                "glass": "assets/textures/glass-panels.png"
             },
-            "meshes": {
-                // "warehouse": "assets/models/warehouse.obj",
-                "floor": "assets/models/warehouse/floor.obj",
-                "closed_gates": "assets/models/warehouse/closed_gates.obj",
-                "columns": "assets/models/warehouse/columns.obj",
-                "frames": "assets/models/warehouse/frames.obj",
-                "opened_gates": "assets/models/warehouse/opened_gates.obj",
-                "roof": "assets/models/warehouse/roof.obj",
-                "walls": "assets/models/warehouse/walls.obj",
+            "meshes":{
                 "cube": "assets/models/cube.obj",
+                "monkey": "assets/models/monkey.obj",
                 "plane": "assets/models/plane.obj",
-                "sphere": "assets/models/sphere.obj",
-                "weapon": "assets/models/shotgun2.obj",
-                // "monster": "assets/models/zombie2.obj",
-                "zombie": "assets/models/zombie.obj",
-                "ghost": "assets/models/ghost_by_dommk.obj"
+                "sphere": "assets/models/sphere.obj"
             },
-            "samplers": {
-                "default": {},
-                "pixelated": {
+            "samplers":{
+                "default":{},
+                "pixelated":{
                     "MAG_FILTER": "GL_NEAREST"
                 }
             },
-            "materials": {
-                "metal": {
+            "materials":{
+                "metal":{
                     "type": "tinted",
                     "shader": "tinted",
                     "pipelineState": {
-                        "faceCulling": {
+                        "faceCulling":{
                             "enabled": false
                         },
-                        "depthTesting": {
+                        "depthTesting":{
                             "enabled": true
                         }
                     },
-                    "tint": [1, 0, 0, 1]
+                    "tint": [0.45, 0.4, 0.5, 1]
                 },
-                "glass": {
+                "glass":{
                     "type": "textured",
                     "shader": "textured",
-                    // "type": "lited",
-                    // "shader": "lited",
                     "pipelineState": {
-                        "faceCulling": {
+                        "faceCulling":{
                             "enabled": false
                         },
-                        "depthTesting": {
+                        "depthTesting":{
                             "enabled": true
                         },
-                        "blending": {
+                        "blending":{
                             "enabled": true,
                             "sourceFactor": "GL_SRC_ALPHA",
                             "destinationFactor": "GL_ONE_MINUS_SRC_ALPHA"
@@ -135,19 +83,16 @@
                     "transparent": true,
                     "tint": [1, 1, 1, 1],
                     "texture": "glass",
-                    // "albedo_map": "glass",
                     "sampler": "pixelated"
                 },
-                "grass": {
+                "grass":{
                     "type": "textured",
                     "shader": "textured",
-                    // "type": "lited",
-                    // "shader": "lited",
                     "pipelineState": {
-                        "faceCulling": {
+                        "faceCulling":{
                             "enabled": false
                         },
-                        "depthTesting": {
+                        "depthTesting":{
                             "enabled": true
                         }
                     },
@@ -155,370 +100,152 @@
                     "texture": "grass",
                     "sampler": "default"
                 },
-                "concrete": {
-                    // "type": "textured",
-                    // "shader": "textured",
-                    "type": "lited",
-                    "shader": "lited",
-                    "pipelineState": {
-                        "faceCulling": {
-                            "enabled": false
-                        },
-                        "depthTesting": {
-                            "enabled": true
-                        }
-                    },
-                    "tint": [1, 1, 1, 1],
-                    "albedo_map": "concrete_color",
-                    "roughness_map": "concrete_rough",
-                    // "metallic_map": "concrete_met",
-                    "normal_map": "concrete_nrm",
-                    "sampler": "default"
-                },
-                "floor": {
-                    // "type": "textured",
-                    // "shader": "textured",
-                    "type": "lited",
-                    "shader": "lited",
-                    "pipelineState": {
-                        "faceCulling": {
-                            "enabled": false
-                        },
-                        "depthTesting": {
-                            "enabled": true
-                        }
-                    },
-                    "tint": [1, 1, 1, 1],
-                    "albedo_map": "floor_color",
-                    "roughness_map": "floor_rough",
-                    // "metallic_map": "floor_met",
-                    "normal_map": "floor_nrm",
-                    "sampler": "default"
-                },
-                "gates": {
-                    // "type": "textured",
-                    // "shader": "textured",
-                    "type": "lited",
-                    "shader": "lited",
-                    "pipelineState": {
-                        "faceCulling": {
-                            "enabled": false
-                        },
-                        "depthTesting": {
-                            "enabled": true
-                        }
-                    },
-                    "tint": [1, 1, 1, 1],
-                    "albedo_map": "gates_color",
-                    "roughness_map": "gates_rough",
-                    // "metallic_map": "gates_met",
-                    "normal_map": "gates_nrm",
-                    "sampler": "default"
-                },
-                "Metal": {
-                    // "type": "textured",
-                    // "shader": "textured",
-                    "type": "lited",
-                    "shader": "lited",
-                    "pipelineState": {
-                        "faceCulling": {
-                            "enabled": false
-                        },
-                        "depthTesting": {
-                            "enabled": true
-                        }
-                    },
-                    "tint": [1, 1, 1, 1],
-                    "albedo_map": "Metal_color",
-                    "roughness_map": "Metal_rough",
-                    // "metallic_map": "Metal_met",
-                    "normal_map": "Metal_nrm",
-                    "sampler": "default"
-                },
-                "roof": {
-                    // "type": "textured",
-                    // "shader": "textured",
-                    "type": "lited",
-                    "shader": "lited",
-                    "pipelineState": {
-                        "faceCulling": {
-                            "enabled": false
-                        },
-                        "depthTesting": {
-                            "enabled": true
-                        }
-                    },
-                    "tint": [1, 1, 1, 1],
-                    "albedo_map": "roof_color",
-                    "roughness_map": "roof_rough",
-                    // "metallic_map": "roof_met",
-                    "normal_map": "roof_nrm",
-                    "sampler": "default"
-                },
-                "walls": {
-                    // "type": "textured",
-                    // "shader": "textured",
-                    "type": "lited",
-                    "shader": "lited",
-                    "pipelineState": {
-                        "faceCulling": {
-                            "enabled": false
-                        },
-                        "depthTesting": {
-                            "enabled": true
-                        }
-                    },
-                    "tint": [1, 1, 1, 1],
-                    "albedo_map": "walls_color",
-                    "roughness_map": "walls_rough",
-                    // "metallic_map": "walls_met",
-                    "normal_map": "walls_nrm",
-                    "sampler": "default"
-                },
-                "weapon": {
+                "wood":{
                     "type": "textured",
                     "shader": "textured",
                     "pipelineState": {
-                        "faceCulling": {
+                        "faceCulling":{
                             "enabled": false
                         },
-                        "depthTesting": {
+                        "depthTesting":{
                             "enabled": true
                         }
                     },
                     "tint": [1, 1, 1, 1],
-                    "texture": "weapon",
+                    "texture": "wood",
                     "sampler": "default"
                 },
-                "zombie": {
-                    "type": "lited",
-                    "shader": "lited",
-                    "pipelineState": {
-                        "faceCulling": {
-                            "enabled": false
-                        },
-                        "depthTesting": {
-                            "enabled": true
-                        }
-                    },
-                    "tint": [1, 1, 1, 1],
-                    "albedo_map": "zombie_color",
-                    "emissive_map": "zombie_emmision",
-                    "normal_map": "zombie_nrm",
-                    "roughness_map": "zombie_rough",
-                    "sampler": "default"
-                },
-                "ghost": {
+                "moon":{
                     "type": "textured",
                     "shader": "textured",
                     "pipelineState": {
-                        "faceCulling": {
+                        "faceCulling":{
                             "enabled": false
                         },
-                        "depthTesting": {
+                        "depthTesting":{
                             "enabled": true
                         }
                     },
                     "tint": [1, 1, 1, 1],
-                    "texture": "ghost",
+                    "texture": "moon",
                     "sampler": "default"
                 }
             }
         },
-        "world": [
+        "world":[
             {
-                "name": "player",
-                "position": [-4, 1, 5],
+                "position": [0, 0, 10],
                 "components": [
                     {
                         "type": "Camera"
-                    },
-                    {
-                        "type": "Free Camera Controller"
-                    },
-                    {
-                        "type": "Collision"
-                        // "CollisionRadius": "1"
                     }
                 ],
                 "children": [
                     {
-                        "name": "weapon",
-                        "position": [0.8, -1.8, 0],
-                        "rotation": [-2, 90, 0],
-                        "scale": [7, 7, 5],
+                        "position": [1, -1, -1],
+                        "rotation": [45, 45, 0],
+                        "scale": [0.1, 0.1, 1.0],
                         "components": [
                             {
                                 "type": "Mesh Renderer",
-                                "mesh": "weapon",
-                                "material": "weapon"
-                            },
-                            {
-                                "type": "Collision"
+                                "mesh": "cube",
+                                "material": "metal"
                             }
                         ]
                     }
                 ]
             },
             {
-                "name": "Light",
-                "position": [1, 1, 1],
-                "rotation": [0, -1, 0],
+                "rotation": [-45, 0, 0],
                 "components": [
                     {
-                        "type": "Directional Light",
-                        "diffuse": [0.2, 0.2, 0.2],
-                        "specular": [0.1, 0.1, 0.1],
-                        "ambient": [0.1, 0.1, 0.1]
-                    }
-                ]
-            },
-            {
-                // Left Back
-                "name": "Light",
-                "position": [-45, 4, 15],
-                "rotation": [0, -1, 0],
-                "components": [
-                    {
-                        "type": "Point Light",
-                        "diffuse": [0.6, 0.2, 0.2],
-                        "specular": [0.1, 0.1, 0.1],
-                        "ambient": [1.0, 0.5, 0.5],
-                        "attenuation": [0.01, 0.01, 0.01]
-                    }
-                ]
-            },
-            {
-                // Left Center
-                "name": "Light",
-                "position": [-45, 7, 0],
-                "rotation": [0, -1, 0],
-                "components": [
-                    {
-                        "type": "Point Light",
-                        "diffuse": [0.6, 0.2, 0.2],
-                        "specular": [0.1, 0.1, 0.1],
-                        "ambient": [1.0, 0.5, 0.5],
-                        "attenuation": [0.01, 0.01, 0.01]
-                    }
-                ]
-            },
-            {
-                // Left Front
-                "name": "Light",
-                "position": [-45, 4, -15],
-                "rotation": [0, -1, 0],
-                "components": [
-                    {
-                        "type": "Point Light",
-                        "diffuse": [0.6, 0.2, 0.2],
-                        "specular": [0.1, 0.1, 0.1],
-                        "ambient": [1.0, 0.5, 0.5],
-                        "attenuation": [0.01, 0.01, 0.01]
-                    }
-                ]
-            },
-            {
-                "name": "Light",
-                "position": [45, 2, 15],
-                "rotation": [-1, 0, 0],
-                "components": [
-                    {
-                        "type": "Spot Light",
-                        "diffuse": [1.0, 0.5, 0.5],
-                        "specular": [0.3, 0.3, 0.3],
-                        "ambient": [0.6, 0.6, 0.6],
-                        "attenuation": [0.02, 0.02, 0.02],
-                        "inner_angle": 10,
-                        "outer_angle": 50
+                        "type": "Mesh Renderer",
+                        "mesh": "monkey",
+                        "material": "wood"
                     }
                 ]
             },
             {
                 "position": [0, -1, 0],
-                "rotation": [0, 0, 0],
+                "rotation": [-90, 0, 0],
+                "scale": [10, 10, 1],
                 "components": [
                     {
                         "type": "Mesh Renderer",
-                        "mesh": "floor",
-                        "material": "floor"
+                        "mesh": "plane",
+                        "material": "grass"
                     }
                 ]
             },
             {
-                "name": "not monster",
-                "position": [-4, -1, 0],
+                "position": [0, 1, 2],
                 "rotation": [0, 0, 0],
-                "scale": [0.22, 0.22, 0.22],
+                "scale": [2, 2, 2],
                 "components": [
                     {
                         "type": "Mesh Renderer",
-                        "mesh": "zombie",
-                        "material": "zombie"
-                    },
-                    {
-                        "type": "Movement",
-                        "linearVelocity": [0, 0, 0] //,
-                        // "angularVelocity": [0, 45, 0]
-                    },
-                    {
-                        "type": "Collision",
-                        "CollisionRadius": 2
+                        "mesh": "plane",
+                        "material": "glass"
                     }
                 ]
             },
             {
-                "position": [0, -1, 0],
+                "position": [0, 1, -2],
                 "rotation": [0, 0, 0],
+                "scale": [2, 2, 2],
                 "components": [
                     {
                         "type": "Mesh Renderer",
-                        "mesh": "opened_gates",
-                        "material": "gates"
+                        "mesh": "plane",
+                        "material": "glass"
                     }
                 ]
             },
             {
-                "position": [0, -1, 0],
-                "rotation": [0, 0, 0],
+                "position": [2, 1, 0],
+                "rotation": [0, 90, 0],
+                "scale": [2, 2, 2],
                 "components": [
                     {
                         "type": "Mesh Renderer",
-                        "mesh": "roof",
-                        "material": "roof"
+                        "mesh": "plane",
+                        "material": "glass"
                     }
                 ]
             },
             {
-                "position": [0, -1, 0],
-                "rotation": [0, 0, 0],
+                "position": [-2, 1, 0],
+                "rotation": [0, 90, 0],
+                "scale": [2, 2, 2],
                 "components": [
                     {
                         "type": "Mesh Renderer",
-                        "mesh": "walls",
-                        "material": "walls"
+                        "mesh": "plane",
+                        "material": "glass"
                     }
                 ]
             },
             {
-                "position": [0, -1, 0],
-                "rotation": [0, 0, 0],
+                "position": [0, 3, 0],
+                "rotation": [90, 0, 0],
+                "scale": [2, 2, 2],
                 "components": [
                     {
                         "type": "Mesh Renderer",
-                        "mesh": "columns",
-                        "material": "walls"
+                        "mesh": "plane",
+                        "material": "glass"
                     }
                 ]
             },
             {
-                "position": [0, -1, 0],
-                "rotation": [0, 0, 0],
+                "position": [0, 10, 0],
+                "rotation": [45, 45, 0],
+                "scale": [5, 5, 5],
                 "components": [
                     {
                         "type": "Mesh Renderer",
-                        "mesh": "frames",
-                        "material": "walls"
+                        "mesh": "sphere",
+                        "material": "moon"
                     }
                 ]
             }

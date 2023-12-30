@@ -116,6 +116,7 @@ namespace our
                 position += right * (deltaTime * current_sensitivity.x);
             if (app->getKeyboard().isPressed(GLFW_KEY_A))
                 position -= right * (deltaTime * current_sensitivity.x);
+
             if (position.z >= 14)
             {
                 position.z = 14;
@@ -128,7 +129,7 @@ namespace our
             {
                 position.x = 44;
             }
-             if (position.x <= -44)
+            if (position.x <= -44)
             {
                 position.x = -44;
             }

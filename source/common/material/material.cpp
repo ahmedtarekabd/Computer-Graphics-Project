@@ -146,7 +146,7 @@ namespace our
         if (normal_map)
         {
             // Bind the first roughness_map to unit 6
-            glActiveTexture(GL_TEXTURE5);
+            glActiveTexture(GL_TEXTURE6);
             normal_map->bind();
             sampler->bind(6);
             shader->set("textured_material.normal_map", 6);

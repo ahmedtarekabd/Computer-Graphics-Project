@@ -99,9 +99,11 @@ void main() {
     if (material.shininess < 0.0)
         acutalMaterial = sample_material(textured_material, fsin.tex_coord);
 
+    // frag_color = vec4(acutalMaterial.emissive, 1.0);
+    // return;
+
     // count = 0;
     for (int index = 0; index < count; index++) {
-
 
         Light light = lights[index];
         vec3 light_direction;
@@ -135,9 +137,10 @@ void main() {
         vec3 diffuse = acutalMaterial.diffuse * light.diffuse * lambert;
         vec3 specular = acutalMaterial.specular * light.specular * phong;
         vec3 ambient = acutalMaterial.ambient * light.ambient;
-        accumulated_light += (diffuse + specular) * attenuation + ambient;        
+        accumulated_light += (diffuse + specular) * attenuation + ambient + acutalMaterial.emissive;
 
     }
 
+    accumulated_light += acutalMaterial.ambient;
     frag_color = fsin.color * vec4(accumulated_light, 1.0);
 }
