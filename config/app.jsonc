@@ -88,6 +88,7 @@
                 "cube": "assets/models/cube.obj",
                 "plane": "assets/models/plane.obj",
                 "sphere": "assets/models/sphere.obj",
+                // "weapon": "assets/models/Remington_Model_M31.obj",
                 "weapon": "assets/models/shotgun2.obj",
                 // "monster": "assets/models/zombie2.obj",
                 "zombie": "assets/models/zombie.obj",

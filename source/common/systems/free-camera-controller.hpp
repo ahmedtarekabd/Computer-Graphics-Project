@@ -109,15 +109,30 @@ namespace our
             if (app->getKeyboard().isPressed(GLFW_KEY_S))
                 position -= front * (deltaTime * current_sensitivity.z);
             // Q & E moves the player up and down
-            if (app->getKeyboard().isPressed(GLFW_KEY_Q))
-                position += up * (deltaTime * current_sensitivity.y);
-            if (app->getKeyboard().isPressed(GLFW_KEY_E))
-                position -= up * (deltaTime * current_sensitivity.y);
+            // if(app->getKeyboard().isPressed(GLFW_KEY_Q)) position += up * (deltaTime * current_sensitivity.y);
+            // if(app->getKeyboard().isPressed(GLFW_KEY_E)) position -= up * (deltaTime * current_sensitivity.y);
             // A & D moves the player left or right
             if (app->getKeyboard().isPressed(GLFW_KEY_D))
                 position += right * (deltaTime * current_sensitivity.x);
             if (app->getKeyboard().isPressed(GLFW_KEY_A))
                 position -= right * (deltaTime * current_sensitivity.x);
+
+            if (position.z >= 14)
+            {
+                position.z = 14;
+            }
+            if (position.z <= -14)
+            {
+                position.z = -14;
+            }
+            if (position.x >= 44)
+            {
+                position.x = 44;
+            }
+            if (position.x <= -44)
+            {
+                position.x = -44;
+            }
             position.y = 0;
         }
 

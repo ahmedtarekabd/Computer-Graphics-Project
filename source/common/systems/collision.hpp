@@ -8,6 +8,7 @@
 #include <glm/gtc/constants.hpp>
 #include <glm/trigonometric.hpp>
 #include <glm/gtx/fast_trigonometry.hpp>
+using namespace std;
 
 namespace our
 {
@@ -79,15 +80,17 @@ namespace our
             {
                 m = monsters[i];
                 auto mcenter = m->getOwner()->getLocalToWorldMatrix() * glm::vec4(0, 0, 0, 1);
-                playercenter.y = -1;
-                mcenter.z -= 1;
+                playercenter.y = 0;
+                mcenter.y += 1;
                 auto pdistance = glm::distance(playercenter, mcenter);
                 if (pdistance < 1.5)
                 {
-                    world->markForRemoval(m->getOwner());
-                    world->deleteMarkedEntities();
+                    /// HENA hanro7 ll lose state
                 }
             }
+
+            auto targetdirection = target->getLocalToWorldMatrix() * glm::vec4(0.0, 0.0, -1.0, 0.0);
+            targetdirection = normalize(targetdirection);
 
             if (app->getKeyboard().isPressed(GLFW_KEY_R))
             {
@@ -95,89 +98,39 @@ namespace our
                 {
                     m = monsters[j];
                     auto mcenter = m->getOwner()->getLocalToWorldMatrix() * glm::vec4(0, 0, 0, 1);
+                    mcenter.y += 1.5;
+                    cout << "(" << mcenter.x << "," << mcenter.y << "," << mcenter.z << ")" << std::endl;
                     auto targetcenter = target->getLocalToWorldMatrix() * glm::vec4(0, 0, 0, 1);
-                    mcenter.y++;
-                    auto tdistance = glm::distance(glm::vec2(targetcenter.x, targetcenter.y), glm::vec2(mcenter.x, mcenter.y));
-                    auto t3distance = glm::distance(targetcenter, mcenter);
-                    std::cout << "(" << mcenter.x << "," << mcenter.y << "," << mcenter.z << ")" << std::endl;
-                    std::cout << "(" << targetcenter.x << "," << targetcenter.y << "," << targetcenter.z << ")" << std::endl;
-                    std::cout << tdistance;
-                    if (tdistance < 1.5)
+                    glm::vec4 Voc = mcenter - targetcenter;
+                    glm::vec4 Poc = Voc * glm::dot(glm::normalize(Voc), targetdirection);
+                    float d = std::sqrtf(glm::dot(Voc, Voc) - glm::dot(Poc, Poc));
+                    cout << d;
+                    if (d < 1)
                     {
+                        auto it = monsters.begin() + j;
+                        monsters.erase(it);
                         world->markForRemoval(m->getOwner());
                         world->deleteMarkedEntities();
+                        if (monsters.size() == 0)
+                        {
+                            /// hena elwin
+                            cout << "win";
+                        }
                     }
-                    
+
+                    //
+                    // auto tdistance = glm::distance(glm::vec2(targetcenter.y, targetcenter.z), glm::vec2(mcenter.y, mcenter.z));
+                    // //auto t3distance = glm::distance(targetcenter, mcenter);
+                    // std::cout << "(" << mcenter.x << "," << mcenter.y << "," << mcenter.z << ")" << std::endl;
+                    // std::cout << "(" << targetcenter.x << "," << targetcenter.y << "," << targetcenter.z << ")" << std::endl;
+                    // std::cout << tdistance;
+                    // if (tdistance < 1.5)
+                    // {
+                    //     world->markForRemoval(m->getOwner());
+                    //     world->deleteMarkedEntities();
+                    // }
                 }
             }
-
-            // CollisionComponent *firstentity;
-            // CollisionComponent *seconedentity;
-            // for (int i = 0; i < collisionentities.size(); i++)
-            // {
-            //     firstentity = collisionentities[i];
-            //     auto firstcenter = firstentity->getOwner()->getLocalToWorldMatrix() * glm::vec4(0, 0, 0, 1);
-            //     for (int j = i + 1; j < collisionentities.size(); j++)
-            //     {
-            //         seconedentity = collisionentities[j];
-            //         auto seconedcenter = seconedentity->getOwner()->getLocalToWorldMatrix() * glm::vec4(0, 0, 0, 1);
-            //         auto distance = glm::distance(firstcenter, seconedcenter);
-            //         // std::cout << distance;
-            //         if (distance < 1.3)
-            //         {
-            //             if (firstentity->getOwner()->name == "player" && seconedentity->getOwner()->name == "monster")
-            //             {
-            //                 world->markForRemoval(seconedentity->getOwner());
-            //                 world->deleteMarkedEntities();
-            //                 std::cout << "die";
-            //             }
-            //             if (firstentity->getOwner()->name == "monster" && seconedentity->getOwner()->name == "player")
-            //             {
-            //                 world->markForRemoval(firstentity->getOwner());
-            //                 world->deleteMarkedEntities();
-            //                 std::cout << "die2";
-            //             }
-            //         }
-            //     }
-
-            // for (int j = i + 1; j < collisionentities.size(); j++)
-            // {
-
-            //     seconedentity = collisionentities[j];
-            //     auto seconedcenter = seconedentity->getOwner()->getLocalToWorldMatrix() * glm::vec4(0, 0, 0, 1);
-            //     if (firstentity->getOwner()->name == "target" && seconedentity->getOwner()->name == "monster" || firstentity->getOwner()->name == "monster" && seconedentity->getOwner()->name == "target")
-            //     {
-            //         auto distance = glm::distance(glm::vec2(firstcenter), glm::vec2(seconedcenter));
-            //         // std::cout << distance;
-            //         if (app->getMouse().isPressed(GLFW_MOUSE_BUTTON_RIGHT))
-            //         {
-            //             std::cout << "c";
-            //             if (distance < 1)
-            //             {
-            //                 std::cout << "p";
-            //                 if (seconedentity->getOwner()->name == "monster")
-            //                 {
-            //                     seconedentity->CollisionRadius--;
-            //                     std::cout << "-";
-            //                     if (seconedentity->CollisionRadius == 0)
-            //                     {
-            //                         world->markForRemoval(seconedentity->getOwner());
-            //                         world->deleteMarkedEntities();
-            //                     }
-            //                 }
-            //                 else
-            //                 {
-            //                     firstentity->CollisionRadius--;
-            //                     if (firstentity->CollisionRadius == 0)
-            //                     {
-            //                         world->markForRemoval(firstentity->getOwner());
-            //                         world->deleteMarkedEntities();
-            //                     }
-            //                 }
-            //             }
-            //         }
-            //     }
-            // }
         }
     };
 }
