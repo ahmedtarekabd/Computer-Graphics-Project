@@ -125,7 +125,7 @@ namespace our
         }
     }
 
-    void ForwardRenderer::render(World *world)
+    void ForwardRenderer::render(World *world, float time)
     {
         // First of all, we search for a camera and for all the mesh renderers
         CameraComponent *camera = nullptr;
@@ -165,11 +165,11 @@ namespace our
         // TODO: (Req 9) Modify the following line such that "cameraForward" contains a vector pointing the camera forward direction
         //  HINT: See how you wrote the CameraComponent::getViewMatrix, it should help you solve this one
         glm::vec3 cameraForward = glm::vec3(camera->getOwner()->getLocalToWorldMatrix() * glm::vec4(0.0, 0.0, -1.0f, 0.0f));
-        std::sort(transparentCommands.begin(), transparentCommands.end(), [cameraForward](const RenderCommand &first, const RenderCommand &second){
+        std::sort(transparentCommands.begin(), transparentCommands.end(), [cameraForward](const RenderCommand &first, const RenderCommand &second)
+                  {
             //TODO: (Req 9) Finish this function
             // HINT: the following return should return true "first" should be drawn before "second". 
-            return first.center.z < second.center.z;
-        });
+            return first.center.z < second.center.z; });
 
         // TODO: (Req 9) Get the camera ViewProjection matrix and store it in VP
         glm::mat4 VP = camera->getProjectionMatrix(windowSize) * camera->getViewMatrix();
@@ -309,6 +309,8 @@ namespace our
 
             glBindVertexArray(postProcessVertexArray);
             postprocessMaterial->setup();
+            postprocessMaterial->shader->set("u_time", (GLfloat)time);
+            // postprocessMaterial->shader->set("animationTime", 5.0f);
             glDrawArrays(GL_TRIANGLES, 0, 3);
         }
     }

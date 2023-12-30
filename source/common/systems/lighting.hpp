@@ -4,12 +4,15 @@
 #include "../components/light.hpp"
 #include <shader/shader.hpp>
 #include "../asset-loader.hpp"
+#include "../deserialize-utils.hpp"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/constants.hpp>
 #include <glm/trigonometric.hpp>
 #include <glm/gtx/fast_trigonometry.hpp>
 #include <iostream>
+
+#include <glm/vec3.hpp>
 
 namespace our
 {
@@ -24,6 +27,8 @@ namespace our
         ShaderProgram *shader = nullptr;
         std::vector<LightComponent *> lights;
 
+        glm::vec3 defaultAmbient;
+
     public:
         // Load Light Components to the shader
         void initialize(World *world, const nlohmann::json &config)
@@ -32,8 +37,9 @@ namespace our
             std::cout << "LightingSystem::initialize" << std::endl;
 
             // Get the shader program
-            // shader = AssetLoader<ShaderProgram>::get(config["shader"].get<std::string>());
-            shader = AssetLoader<ShaderProgram>::get("lited");
+            shader = AssetLoader<ShaderProgram>::get(config["shader"].get<std::string>());
+
+            defaultAmbient = config.value("ambient", glm::vec3(0.15f, 0.15f, 0.15f));
 
             for (auto entity : world->getEntities())
             {
@@ -44,6 +50,11 @@ namespace our
                 // If entity is light component
                 if (light)
                 {
+
+                    // Set default ambient if not specified in the light entity (.json file)
+                    if (light->ambient == glm::vec3(0.0f, 0.0f, 0.0f))
+                        light->ambient = defaultAmbient;
+
                     // Set Uniforms light uniforms
                     light->setUniforms(shader);
                     // Add light to the lights vector

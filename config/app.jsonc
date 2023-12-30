@@ -11,10 +11,14 @@
     "scene": {
         "renderer": {
             "sky": "assets/textures/sky.jpg",
-            "postprocess": "assets/shaders/postprocess/vignette.frag"
+            // "postprocess": "assets/shaders/postprocess/vignette.frag",
+            "postprocess": "assets/shaders/postprocess/shake-with-blur.frag",
+            "damagePostprocess": "assets/shaders/postprocess/vignette.frag"
         },
+        // Lightning system
         "lighting": {
-            "shader": "lited"
+            "shader": "lited",
+            "ambient": [0.1, 0.1, 0.1]
         },
         "assets": {
             "shaders": {
@@ -419,9 +423,9 @@
                     },
                     {
                         "name": "target",
-                        "position": [0.3, -0.5, -5],
+                        "position": [0, 0, -0.5],
                         "rotation": [0, 0, 0],
-                        "scale": [0.1, 0.1, 0.1],
+                        "scale": [0.015, 0.015, 0.015],
                         "components": [
                             {
                                 "type": "Mesh Renderer",

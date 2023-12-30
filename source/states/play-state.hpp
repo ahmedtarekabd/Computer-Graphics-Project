@@ -21,6 +21,11 @@ class Playstate : public our::State
     our::CollisionSystem collisionSystem;
     our::LightingSystem lightingSystem;
 
+    // Stores time form start of the play scene for animation purposes
+    float time;
+
+    float animationDuration;
+
     void onInitialize() override
     {
         // First of all, we get the scene configuration from the app config
@@ -47,17 +52,37 @@ class Playstate : public our::State
         lightingSystem.initialize(&world, config["lighting"]);
 
         // Initalize Collision
+
+        time = 0;
+        animationDuration = 5.0f;
     }
 
     void onDraw(double deltaTime) override
     {
+
+        time += (float)deltaTime;
+
         // Here, we just run a bunch of systems to control the world logic
         movementSystem.update(&world, (float)deltaTime);
         cameraController.update(&world, (float)deltaTime);
         collisionSystem.update(&world, (float)deltaTime);
         // lightingSystem.update();
+
+        // When colloision happens, we want to start the animation
+        // if (collision)
+        //     animationDuration = 1.0f;
+
         // And finally we use the renderer system to draw the scene
-        renderer.render(&world);
+        renderer.render(&world, animationDuration);
+
+        if (animationDuration > 0.0f && deltaTime > 1.0f)
+            animationDuration -= 0.05f;
+        else if (animationDuration > 0.0f)
+            animationDuration -= (float)deltaTime;
+
+        // std::cout << "animationDuration = " << animationDuration << "delta time = " << deltaTime << std::endl;
+        // while (true)
+        //     ;
 
         // Get a reference to the keyboard object
         auto &keyboard = getApp()->getKeyboard();

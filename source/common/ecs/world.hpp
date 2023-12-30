@@ -12,6 +12,10 @@ namespace our
         std::unordered_set<Entity *> entities;         // These are the entities held by this world
         std::unordered_set<Entity *> markedForRemoval; // These are the entities that are awaiting to be deleted
                                                        // when deleteMarkedEntities is called
+
+        // For Inital 
+        std::unordered_set<Entity *> entitiesNotRendered; // These are the entities held by this world but not rendered yet
+
     public:
         World() = default;
 
@@ -24,14 +28,23 @@ namespace our
         // WARNING The entity is owned by this world so don't use "delete" to delete it, instead, call "markForRemoval"
         // to put it in the "markedForRemoval" set. The elements in the "markedForRemoval" set will be removed and
         // deleted when "deleteMarkedEntities" is called.
-        Entity *add()
+        Entity *add(bool render = true)
         {
             // TODO: (Req 8) Create a new entity, set its world member variable to this,
             //  and don't forget to insert it in the suitable container.
             Entity *newentity = new Entity(); // crete new entity
             newentity->world = this;          // set its world to this world
-            entities.insert(newentity);       // insert in the entites list of this world
-            return newentity;                 // returns new entity
+            if (render)                       // if render is true
+            {
+                entities.insert(newentity); // insert in the entites list of this world
+            }
+            else
+            {
+                // TODO: make a new list to add objects that are not rendered temporary
+                markedForRemoval.insert(newentity); // insert in the marked for removal list of this world
+            }
+
+            return newentity; // returns new entity
         }
 
         // This returns and immutable reference to the set of all entites in the world.
