@@ -8,6 +8,9 @@
 #include <glm/gtc/constants.hpp>
 #include <glm/trigonometric.hpp>
 #include <glm/gtx/fast_trigonometry.hpp>
+
+#include "./game-controller.hpp"
+
 using namespace std;
 
 namespace our
@@ -22,6 +25,8 @@ namespace our
 
     public:
         // This should be called every frame to update all entities containing a MovementComponent.
+
+        // When a state enters, it should call this function and give it the pointer to the application
         void enter(Application *app)
         {
             this->app = app;
@@ -46,7 +51,7 @@ namespace our
 
         void update(World *world, float deltaTime)
         {
-            // For each entity in the world
+            // Store all entities having a Collosion component by iterating through all entities in the world
             Entity *player;
             Entity *target;
             std::vector<CollisionComponent *> monsters;
@@ -58,7 +63,6 @@ namespace our
                 // If the movement component exists
                 if (collision)
                 {
-
                     if (collision->getOwner()->name == "player")
                     {
                         player = entity;
@@ -115,6 +119,8 @@ namespace our
                         {
                             /// hena elwin
                             cout << "win";
+                            GameController::setState("win");
+                            app->changeState("exit");
                         }
                     }
 

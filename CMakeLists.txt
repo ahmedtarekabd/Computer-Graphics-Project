@@ -30,7 +30,7 @@ set(IMGUI_SOURCES
 set(VENDOR_SOURCES ${GLAD_SOURCE} ${IMGUI_SOURCES})
 
 # A variable with all our source files that are common between executable targets (examples)
-set(COMMON_SOURCES
+set(COMMON_SOURCES 
         source/common/application.hpp
         source/common/application.cpp
         source/common/input/keyboard.hpp
@@ -82,6 +82,9 @@ set(COMMON_SOURCES
         source/common/components/Collision.hpp
         source/common/components/Collision.cpp
 
+        source/common/components/light.hpp
+        source/common/components/light.cpp
+
         source/common/systems/forward-renderer.hpp
         source/common/systems/forward-renderer.cpp
         source/common/systems/free-camera-controller.hpp
@@ -89,9 +92,9 @@ set(COMMON_SOURCES
         source/common/systems/collision.hpp
 
         source/common/systems/lighting.hpp
-
-        source/common/components/light.hpp
-        source/common/components/light.cpp
+        
+        source/common/systems/game-controller.hpp
+        source/common/systems/game-controller.cpp
 
 )
 

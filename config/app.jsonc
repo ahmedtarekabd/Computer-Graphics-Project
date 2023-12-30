@@ -432,6 +432,9 @@
                                 "type": "Mesh Renderer",
                                 "mesh": "plane",
                                 "material": "metal"
+                            },
+                            {
+                                "type": "Collision"
                             }
                         ]
                     }
@@ -538,7 +541,7 @@
                 ]
             },
             {
-                "name": "not monster",
+                "name": "monster",
                 "position": [-4, -1, 0],
                 "rotation": [0, 0, 0],
                 "scale": [0.22, 0.22, 0.22],
@@ -556,6 +559,28 @@
                     {
                         "type": "Collision",
                         "CollisionRadius": 2
+                    }
+                ]
+            },
+            {
+                // Gy men el yemin
+                "name": "monster",
+                "position": [80, -1, 0],
+                "rotation": [0, -90, 0],
+                "scale": [0.22, 0.22, 0.22],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "zombie",
+                        "material": "zombie"
+                    },
+                    {
+                        "type": "Movement",
+                        "linearVelocity": [-1, 0, 0] //,
+                        // "angularVelocity": [0, 45, 0]
+                    },
+                    {
+                        "type": "Collision"
                     }
                 ]
             },

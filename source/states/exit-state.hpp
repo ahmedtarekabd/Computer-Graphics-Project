@@ -6,6 +6,7 @@
 #include <texture/texture-utils.hpp>
 #include <material/material.hpp>
 #include <mesh/mesh.hpp>
+#include <systems/game-controller.hpp>
 
 #include <functional>
 #include <array>
@@ -61,7 +62,10 @@ class Exitstate : public our::State
         exitMaterial->shader->attach("assets/shaders/textured.frag", GL_FRAGMENT_SHADER);
         exitMaterial->shader->link();
         // Then we load the exit texture
-        exitMaterial->texture = our::texture_utils::loadImage("assets/textures/exit.png");
+        if (our::GameController::gameState == "lost")
+            exitMaterial->texture = our::texture_utils::loadImage("assets/textures/lose.png");
+        else
+            exitMaterial->texture = our::texture_utils::loadImage("assets/textures/won.png");
         // Initially, the exit material will be black, then it will fade in
         exitMaterial->tint = glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
 

@@ -20,7 +20,7 @@ namespace our
         // This should be called every frame to update all entities containing a MovementComponent.
         void update(World *world, float deltaTime)
         {
-            // For each entity in the world
+            // Get the player entity
             Entity *player;
             for (auto entity : world->getEntities())
             {
@@ -28,28 +28,27 @@ namespace our
                 if (entity->name == "player")
                 {
                     player = entity;
+                    break;
                 }
-
-                // Get the movement component if it exists
             }
 
+            // Make each monester chase the player
             for (auto entity : world->getEntities())
             {
                 MovementComponent *movement = entity->getComponent<MovementComponent>();
-                // If the movement component exists
+                // If the movement component exists and the entity is monster
                 if (movement)
                 {
-
                     if (entity->name == "monster")
                     {
                         auto direction = player->localTransform.position - entity->localTransform.position;
                         direction = normalize(direction);
-                        direction.y =0;
+                        direction.y = 0;
                         movement->linearVelocity = direction * 1.0f;
 
-                        auto directionangle= atan2(direction.x,direction.z);
+                        auto directionangle = atan2(direction.x, direction.z);
 
-                       entity->localTransform.rotation.y =directionangle;
+                        entity->localTransform.rotation.y = directionangle;
                     }
                     // Change the position and rotation based on the linear & angular velocity and delta time.
                     entity->localTransform.position += deltaTime * movement->linearVelocity;
