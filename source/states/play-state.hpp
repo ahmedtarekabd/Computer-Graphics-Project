@@ -1,7 +1,10 @@
 #pragma once
 
 #include <application.hpp>
+#include <ecs/entity.hpp>
 
+#include <components/Collision.hpp>
+#include <components/mesh-renderer.hpp>
 #include <ecs/world.hpp>
 #include <systems/forward-renderer.hpp>
 #include <systems/free-camera-controller.hpp>
@@ -20,6 +23,11 @@ class Playstate : public our::State
     our::MovementSystem movementSystem;
     our::CollisionSystem collisionSystem;
     our::LightingSystem lightingSystem;
+    our::Entity* nentity;
+
+    double prevtime;
+    double currtime;
+    int countMonst;
 
     void onInitialize() override
     {
@@ -45,6 +53,9 @@ class Playstate : public our::State
         std::cout << "lightingSystem.initialize" << std::endl;
         // Initalize Light
         lightingSystem.initialize(&world, config["lighting"]);
+        prevtime=glfwGetTime();
+        currtime=0;
+        countMonst=0;
 
         // Initalize Collision
     }
@@ -55,6 +66,14 @@ class Playstate : public our::State
         movementSystem.update(&world, (float)deltaTime);
         cameraController.update(&world, (float)deltaTime);
         collisionSystem.update(&world, (float)deltaTime);
+        currtime=glfwGetTime();
+        // std::cout<<"current time"<<currtime<< " prev time"<< prevtime<<std::endl;
+
+        if( countMonst<6 && abs(currtime-prevtime) >= 10){
+            nentity = world.ouradd();
+            prevtime =currtime;
+            countMonst++;
+        }
         // lightingSystem.update();
         // And finally we use the renderer system to draw the scene
         renderer.render(&world);
@@ -67,6 +86,7 @@ class Playstate : public our::State
             // If the escape  key is pressed in this frame, go to the play state
             getApp()->changeState("menu");
         }
+    
     }
 
     void onDestroy() override
