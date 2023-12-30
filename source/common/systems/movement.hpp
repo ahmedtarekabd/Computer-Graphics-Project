@@ -45,13 +45,15 @@ namespace our
                         auto direction = player->localTransform.position - entity->localTransform.position;
                         direction = normalize(direction);
                         direction.y =0;
-                        movement->linearVelocity = direction * 1.3f;
+                        movement->linearVelocity = direction * 1.0f;
 
                         auto directionangle= atan2(direction.x,direction.z);
+
+                       entity->localTransform.rotation.y =directionangle;
                     }
                     // Change the position and rotation based on the linear & angular velocity and delta time.
                     entity->localTransform.position += deltaTime * movement->linearVelocity;
-                    entity->localTransform.rotation += deltaTime * movement->angularVelocity;
+                    // entity->localTransform.rotation += deltaTime * movement->angularVelocity;
                 }
             }
         }
