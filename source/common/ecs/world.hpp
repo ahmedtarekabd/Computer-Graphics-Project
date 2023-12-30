@@ -1,6 +1,9 @@
 #pragma once
 
 #include <unordered_set>
+#include <./components/Collision.hpp>
+#include <./components/mesh-renderer.hpp>
+#include <./components/movement.hpp>
 #include "entity.hpp"
 
 namespace our
@@ -65,6 +68,30 @@ namespace our
                 Entity *foundEntity = *it;
                 markedForRemoval.insert(foundEntity); // insert it in the marked for removal list
             }
+        }
+
+
+        Entity * ouradd()
+        {
+            Entity *newentity = new Entity(); // crete new entity
+            newentity->world = this;    
+            MeshRendererComponent *component = nullptr;
+            MovementComponent *mcomp = nullptr;
+            CollisionComponent *collidecomp = nullptr;
+            
+            newentity->localTransform.position=glm::vec3(40,-1,-1);
+            newentity->localTransform.rotation=glm::vec3(0,-90,0);
+            newentity->localTransform.scale=glm::vec3(0.22,0.22,0.22);
+            component=newentity->addComponent<MeshRendererComponent>();
+            component->mesh=AssetLoader<Mesh>::get("zombie");
+            component->material=AssetLoader<Material>::get("zombie");
+            mcomp=newentity->addComponent<MovementComponent>();
+            mcomp->angularVelocity=glm::vec3(0,0,0);
+            collidecomp=newentity->addComponent<CollisionComponent>();
+            collidecomp->CollisionRadius=1;
+            newentity->name="monster";
+            entities.insert(newentity);  
+            return newentity;
         }
 
         // This removes the elements in "markedForRemoval" from the "entities" set.
