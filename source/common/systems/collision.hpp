@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <cmath>
 #include <iostream>
 #include "../ecs/world.hpp"
 #include "../components/Collision.hpp"
@@ -90,6 +91,8 @@ namespace our
                 if (pdistance < 1.5)
                 {
                     /// HENA hanro7 ll lose state
+                    GameController::setState("lose");
+                    app->changeState("exit");
                 }
             }
 
@@ -107,7 +110,7 @@ namespace our
                     auto targetcenter = target->getLocalToWorldMatrix() * glm::vec4(0, 0, 0, 1);
                     glm::vec4 Voc = mcenter - targetcenter;
                     glm::vec4 Poc = Voc * glm::dot(glm::normalize(Voc), targetdirection);
-                    float d = std::sqrtf(glm::dot(Voc, Voc) - glm::dot(Poc, Poc));
+                    float d = ::sqrtf(glm::dot(Voc, Voc) - glm::dot(Poc, Poc));
                     cout << d;
                     if (d < 1)
                     {
@@ -123,18 +126,6 @@ namespace our
                             app->changeState("exit");
                         }
                     }
-
-                    //
-                    // auto tdistance = glm::distance(glm::vec2(targetcenter.y, targetcenter.z), glm::vec2(mcenter.y, mcenter.z));
-                    // //auto t3distance = glm::distance(targetcenter, mcenter);
-                    // std::cout << "(" << mcenter.x << "," << mcenter.y << "," << mcenter.z << ")" << std::endl;
-                    // std::cout << "(" << targetcenter.x << "," << targetcenter.y << "," << targetcenter.z << ")" << std::endl;
-                    // std::cout << tdistance;
-                    // if (tdistance < 1.5)
-                    // {
-                    //     world->markForRemoval(m->getOwner());
-                    //     world->deleteMarkedEntities();
-                    // }
                 }
             }
         }

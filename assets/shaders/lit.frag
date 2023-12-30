@@ -71,7 +71,7 @@ Material sample_material(TexturedMaterial tex_mat, vec2 tex_coord) {
 // *Light
 #define MAX_LIGHT_COUNT 16
 uniform Light lights[MAX_LIGHT_COUNT];
-uniform int lightCount = 0;
+uniform int lightCount;
 
 // *Material
 // If the material is not textured
@@ -99,8 +99,10 @@ void main() {
     if (material.shininess < 0.0)
         acutalMaterial = sample_material(textured_material, fsin.tex_coord);
 
-    // frag_color = vec4(acutalMaterial.emissive, 1.0);
+    // frag_color = vec4(texture(textured_material.normal_map, fsin.tex_coord).rgb, 1.0);
     // return;
+
+    // normal = texture(textured_material.normal_map, fsin.tex_coord).rgb;
 
     // count = 0;
     for (int index = 0; index < count; index++) {

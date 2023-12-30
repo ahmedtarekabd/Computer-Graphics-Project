@@ -81,6 +81,8 @@ namespace our
         {
             shader = nullptr;
             lights.clear();
+            LightComponent::currentLightIndex = 0;
+            LightComponent::lightCount = 0;
         }
     };
 

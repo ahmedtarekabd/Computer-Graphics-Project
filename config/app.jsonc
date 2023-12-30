@@ -10,7 +10,8 @@
     },
     "scene": {
         "renderer": {
-            "sky": "assets/textures/sky.jpg",
+            // "sky": "assets/textures/sky.jpg",
+            "sky": "assets/textures/sky2.png",
             // "postprocess": "assets/shaders/postprocess/vignette.frag",
             "postprocess": "assets/shaders/postprocess/shake-with-blur.frag",
             "damagePostprocess": "assets/shaders/postprocess/vignette.frag"
@@ -85,6 +86,8 @@
                 "opened_gates": "assets/models/warehouse/opened_gates.obj",
                 "roof": "assets/models/warehouse/roof.obj",
                 "walls": "assets/models/warehouse/walls.obj",
+                "windows": "assets/models/warehouse/windows.obj",
+
                 "cube": "assets/models/cube.obj",
                 "plane": "assets/models/plane.obj",
                 "sphere": "assets/models/sphere.obj",
@@ -192,7 +195,7 @@
                     "tint": [1, 1, 1, 1],
                     "albedo_map": "floor_color",
                     "roughness_map": "floor_rough",
-                    // "metallic_map": "floor_met",
+                    "metallic_map": "floor_met",
                     "normal_map": "floor_nrm",
                     "sampler": "default"
                 },
@@ -212,7 +215,7 @@
                     "tint": [1, 1, 1, 1],
                     "albedo_map": "gates_color",
                     "roughness_map": "gates_rough",
-                    // "metallic_map": "gates_met",
+                    "metallic_map": "gates_met",
                     "normal_map": "gates_nrm",
                     "sampler": "default"
                 },
@@ -232,7 +235,7 @@
                     "tint": [1, 1, 1, 1],
                     "albedo_map": "Metal_color",
                     "roughness_map": "Metal_rough",
-                    // "metallic_map": "Metal_met",
+                    "metallic_map": "Metal_met",
                     "normal_map": "Metal_nrm",
                     "sampler": "default"
                 },
@@ -252,7 +255,7 @@
                     "tint": [1, 1, 1, 1],
                     "albedo_map": "roof_color",
                     "roughness_map": "roof_rough",
-                    // "metallic_map": "roof_met",
+                    "metallic_map": "roof_met",
                     "normal_map": "roof_nrm",
                     "sampler": "default"
                 },
@@ -272,7 +275,7 @@
                     "tint": [1, 1, 1, 1],
                     "albedo_map": "walls_color",
                     "roughness_map": "walls_rough",
-                    // "metallic_map": "walls_met",
+                    "metallic_map": "walls_met",
                     "normal_map": "walls_nrm",
                     "sampler": "default"
                 },
@@ -327,51 +330,6 @@
                     "roughness_map": "zombie_rough",
                     "sampler": "default"
                 },
-                // "monster": {
-                //     "type": "textured",
-                //     "shader": "textured",
-                //     "pipelineState": {
-                //         "faceCulling": {
-                //             "enabled": false
-                //         },
-                //         "depthTesting": {
-                //             "enabled": true
-                //         }
-                //     },
-                //     "tint": [1, 1, 1, 1],
-                //     "texture": "monster",
-                //     "sampler": "default"
-                // },
-                // "wall": {
-                //     "type": "textured",
-                //     "shader": "textured",
-                //     "pipelineState": {
-                //         "faceCulling": {
-                //             "enabled": false
-                //         },
-                //         "depthTesting": {
-                //             "enabled": true
-                //         }
-                //     },
-                //     "tint": [1, 1, 1, 1],
-                //     "texture": "wall",
-                //     "sampler": "default"
-                // },
-                // "asphalt": {
-                //     "type": "textured",
-                //     "shader": "textured",
-                //     "pipelineState": {
-                //         "faceCulling": {
-                //             "enabled": false
-                //         },
-                //         "depthTesting": {
-                //             "enabled": true
-                //         }
-                //     },
-                //     "tint": [1, 1, 1, 1],
-                //     "texture": "asphalt",
-                //     "sampler": "default"
-                // },
                 "ghost": {
                     "type": "textured",
                     "shader": "textured",
@@ -392,7 +350,8 @@
         "world": [
             {
                 "name": "player",
-                "position": [-4, 1, 5],
+                "position": [0, 0, 2],
+                "rotation": [0, 0, 0],
                 "components": [
                     {
                         "type": "Camera"
@@ -443,89 +402,133 @@
             {
                 "name": "Light",
                 "position": [1, 1, 1],
-                "rotation": [0, -1, 0],
+                "rotation": [-1, -1, 0],
                 "components": [
                     {
                         "type": "Directional Light",
-                        "diffuse": [0.2, 0.2, 0.2],
+                        "diffuse": [0.3, 0.2, 0.2],
                         "specular": [0.1, 0.1, 0.1],
-                        "ambient": [0.1, 0.1, 0.1]
+                        "ambient": [0.2, 0.2, 0.2]
+                        // "direction": [1.0, 0.0, 0.0]
                     }
                 ]
             },
             {
-                // Left Back
+                // Top Center
                 "name": "Light",
-                "position": [-45, 4, 15],
-                "rotation": [0, -1, 0],
+                "position": [-3, 5, 0],
+                "rotation": [0, 1, 0],
                 "components": [
                     {
-                        "type": "Point Light",
-                        "diffuse": [0.6, 0.2, 0.2],
+                        "type": "Spot Light",
+                        "diffuse": [0.6, 0.3, 0.3],
                         "specular": [0.1, 0.1, 0.1],
-                        "ambient": [1.0, 0.5, 0.5],
-                        "attenuation": [0.01, 0.01, 0.01]
-                    }
-                ]
-            },
-            {
-                // Left Center
-                "name": "Light",
-                "position": [-45, 7, 0],
-                "rotation": [0, -1, 0],
-                "components": [
-                    {
-                        "type": "Point Light",
-                        "diffuse": [0.6, 0.2, 0.2],
-                        "specular": [0.1, 0.1, 0.1],
-                        "ambient": [1.0, 0.5, 0.5],
-                        "attenuation": [0.01, 0.01, 0.01]
+                        "ambient": [0.6, 0.1, 0.1],
+                        "attenuation": [0.001, 0.001, 0.001],
+                        "inner_angle": 20,
+                        "outter_angle": 40
                     }
                 ]
             },
             {
                 // Left Center
                 "name": "Light",
-                "position": [-4, 5, 0],
-                "rotation": [0, -1, 0],
+                "position": [-42, 5, 0],
+                "rotation": [-1, 1, 0],
                 "components": [
                     {
-                        "type": "Point Light",
-                        "diffuse": [0.4, 0.2, 0.2],
+                        "type": "Spot Light",
+                        "diffuse": [0.6, 0.3, 0.3],
                         "specular": [0.1, 0.1, 0.1],
-                        "ambient": [0.4, 0.4, 0.4],
-                        "attenuation": [0.01, 0.01, 0.01]
+                        "ambient": [0.3, 0.1, 0.1],
+                        "attenuation": [0.001, 0.001, 0.001],
+                        "inner_angle": 20,
+                        "outter_angle": 30
                     }
                 ]
             },
             {
                 // Left Front
                 "name": "Light",
-                "position": [-45, 4, -15],
-                "rotation": [0, -1, 0],
+                "position": [-42, 4, -12],
+                "rotation": [-1, 1, -1],
                 "components": [
                     {
-                        "type": "Point Light",
-                        "diffuse": [0.6, 0.2, 0.2],
+                        "type": "Spot Light",
+                        "diffuse": [0.6, 0.3, 0.3],
                         "specular": [0.1, 0.1, 0.1],
-                        "ambient": [1.0, 0.5, 0.5],
-                        "attenuation": [0.01, 0.01, 0.01]
+                        "ambient": [0.3, 0.1, 0.1],
+                        "attenuation": [0.001, 0.001, 0.001],
+                        "inner_angle": 20,
+                        "outter_angle": 30
                     }
                 ]
             },
             {
+                // Left Back
                 "name": "Light",
-                "position": [45, 2, 15],
-                "rotation": [-1, 0, 0],
+                "position": [-42, 4, 12],
+                "rotation": [-1, 1, 1],
                 "components": [
                     {
                         "type": "Spot Light",
-                        "diffuse": [1.0, 0.5, 0.5],
-                        "specular": [0.3, 0.3, 0.3],
-                        "ambient": [0.6, 0.6, 0.6],
-                        "attenuation": [0.02, 0.02, 0.02],
-                        "inner_angle": 10,
-                        "outer_angle": 50
+                        "diffuse": [0.6, 0.3, 0.3],
+                        "specular": [0.1, 0.1, 0.1],
+                        "ambient": [0.3, 0.1, 0.1],
+                        "attenuation": [0.001, 0.001, 0.001],
+                        "inner_angle": 20,
+                        "outter_angle": 30
+                    }
+                ]
+            },
+            {
+                // Right Center
+                "name": "Light",
+                "position": [42, 5, 0],
+                "rotation": [1, 1, 1],
+                "components": [
+                    {
+                        "type": "Spot Light",
+                        "diffuse": [0.6, 0.2, 0.2],
+                        "specular": [0.1, 0.1, 0.1],
+                        "ambient": [0.3, 0.1, 0.1],
+                        "attenuation": [0.001, 0.001, 0.001],
+                        "inner_angle": 20,
+                        "outter_angle": 30
+                    }
+                ]
+            },
+            {
+                // Right Front
+                "name": "Light",
+                "position": [42, 4, -11],
+                "rotation": [1, 1, -1],
+                "components": [
+                    {
+                        "type": "Spot Light",
+                        "diffuse": [0.6, 0.2, 0.2],
+                        "specular": [0.1, 0.1, 0.1],
+                        "ambient": [0.3, 0.1, 0.1],
+                        "attenuation": [0.001, 0.001, 0.001],
+                        "inner_angle": 20,
+                        "outter_angle": 30
+                    }
+                ]
+            },
+            {
+                // Right Back
+                "name": "Light",
+                "position": [42, 4, 11],
+                "rotation": [1, 1, 1],
+                "components": [
+                    {
+                        "type": "Spot Light",
+                        "diffuse": [0.6, 0.2, 0.2],
+                        "specular": [0.1, 0.1, 0.1],
+                        "ambient": [0.3, 0.1, 0.1],
+                        "attenuation": [0.001, 0.001, 0.001],
+                        "inner_angle": 20,
+                        "outter_angle": 30
                     }
                 ]
             },
@@ -542,8 +545,8 @@
             },
             {
                 "name": "monster",
-                "position": [-4, -1, 0],
-                "rotation": [0, 0, 0],
+                "position": [80, -1, 0],
+                "rotation": [0, -90, 0],
                 "scale": [0.22, 0.22, 0.22],
                 "components": [
                     {
@@ -553,19 +556,16 @@
                     },
                     {
                         "type": "Movement",
-                        "linearVelocity": [0, 0, 0] //,
-                        // "angularVelocity": [0, 45, 0]
+                        "linearVelocity": [-1, 0, 0]
                     },
                     {
-                        "type": "Collision",
-                        "CollisionRadius": 2
+                        "type": "Collision"
                     }
                 ]
             },
             {
-                // Gy men el yemin
                 "name": "monster",
-                "position": [80, -1, 0],
+                "position": [80, -1, -5],
                 "rotation": [0, -90, 0],
                 "scale": [0.22, 0.22, 0.22],
                 "components": [
@@ -584,30 +584,55 @@
                     }
                 ]
             },
-            // {
-            //     "position": [2, 0, -6],
-            //     "rotation": [0, 180, 0],
-            //     "scale": [0.003, 0.003, 0.003],
-            //     "components": [
-            //         {
-            //             "type": "Mesh Renderer",
-            //             "mesh": "ghost",
-            //             "material": "ghost"
-            //         },
-            //         {
-            //             "type": "Movement",
-            //             "linearVelocity": [0, 0, 0] //,
-            //             // "angularVelocity": [0, 45, 0]
-            //         }
-            //     ]
-            // },
+            {
+                "name": "monster",
+                "position": [-80, -1, 0],
+                "rotation": [0, 90, 0],
+                "scale": [0.22, 0.22, 0.22],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "zombie",
+                        "material": "zombie"
+                    },
+                    {
+                        "type": "Movement",
+                        "linearVelocity": [1, 0, 0] //,
+                        // "angularVelocity": [0, 45, 0]
+                    },
+                    {
+                        "type": "Collision"
+                    }
+                ]
+            },
+            {
+                "name": "monster",
+                "position": [-80, -1, 7],
+                "rotation": [0, 90, 0],
+                "scale": [0.22, 0.22, 0.22],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "zombie",
+                        "material": "zombie"
+                    },
+                    {
+                        "type": "Movement",
+                        "linearVelocity": [1, 0, 0] //,
+                        // "angularVelocity": [0, 45, 0]
+                    },
+                    {
+                        "type": "Collision"
+                    }
+                ]
+            },
             {
                 "position": [0, -1, 0],
                 "rotation": [0, 0, 0],
                 "components": [
                     {
                         "type": "Mesh Renderer",
-                        "mesh": "opened_gates",
+                        "mesh": "closed_gates",
                         "material": "gates"
                     }
                 ]
@@ -641,7 +666,18 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "columns",
-                        "material": "walls"
+                        "material": "concrete"
+                    }
+                ]
+            },
+            {
+                "position": [0, -1, 0],
+                "rotation": [0, 0, 0],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "windows",
+                        "material": "concrete"
                     }
                 ]
             },
@@ -652,22 +688,10 @@
                     {
                         "type": "Mesh Renderer",
                         "mesh": "frames",
-                        "material": "walls"
+                        "material": "concrete"
                     }
                 ]
             }
-            // // {
-            // //     "position": [0, -1, 0],
-            // //     "rotation": [-90, 0, 0],
-            // //     "scale": [10, 10, 1],
-            // //     "components": [
-            // //         {
-            // //             "type": "Mesh Renderer",
-            // //             "mesh": "plane",
-            // //             "material": "asphalt"
-            // //         }
-            // //     ]
-            // // }
         ]
     }
 }

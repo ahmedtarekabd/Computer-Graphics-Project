@@ -164,6 +164,7 @@ namespace our
 
         albedo_map = AssetLoader<Texture2D>::get(data.value("albedo_map", ""));
         specular_map = AssetLoader<Texture2D>::get(data.value("specular_map", ""));
+        // specular_map = AssetLoader<Texture2D>::get(data.value("metallic_map", ""));
         ambient_occlusion_map = AssetLoader<Texture2D>::get(data.value("ambient_occlusion_map", ""));
         roughness_map = AssetLoader<Texture2D>::get(data.value("roughness_map", ""));
         emissive_map = AssetLoader<Texture2D>::get(data.value("emissive_map", ""));

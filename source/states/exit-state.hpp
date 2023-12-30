@@ -62,7 +62,7 @@ class Exitstate : public our::State
         exitMaterial->shader->attach("assets/shaders/textured.frag", GL_FRAGMENT_SHADER);
         exitMaterial->shader->link();
         // Then we load the exit texture
-        if (our::GameController::gameState == "lost")
+        if (our::GameController::gameState == "lose")
             exitMaterial->texture = our::texture_utils::loadImage("assets/textures/lose.png");
         else
             exitMaterial->texture = our::texture_utils::loadImage("assets/textures/won.png");
