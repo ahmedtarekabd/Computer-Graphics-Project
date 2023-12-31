@@ -6,7 +6,7 @@
             "width": 1280,
             "height": 720
         },
-        "fullscreen": false
+        "fullscreen": true
     },
     "scene": {
         "renderer": {
@@ -545,7 +545,7 @@
             },
             {
                 "name": "monster",
-                "position": [80, -1, 0],
+                "position": [75, -1, 0],
                 "rotation": [0, -90, 0],
                 "scale": [0.22, 0.22, 0.22],
                 "components": [
@@ -565,7 +565,7 @@
             },
             {
                 "name": "monster",
-                "position": [80, -1, -5],
+                "position": [75, -1, -5],
                 "rotation": [0, -90, 0],
                 "scale": [0.22, 0.22, 0.22],
                 "components": [
@@ -586,7 +586,7 @@
             },
             {
                 "name": "monster",
-                "position": [-80, -1, 0],
+                "position": [-75, -1, 0],
                 "rotation": [0, 90, 0],
                 "scale": [0.22, 0.22, 0.22],
                 "components": [
@@ -607,7 +607,7 @@
             },
             {
                 "name": "monster",
-                "position": [-80, -1, 7],
+                "position": [-75, -1, 7],
                 "rotation": [0, 90, 0],
                 "scale": [0.22, 0.22, 0.22],
                 "components": [
