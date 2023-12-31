@@ -18,7 +18,7 @@ uniform float u_time = 0;
 void main(){
 
     // TODO: clap/smoothstep
-    float strength = smoothstep(0, 5, u_time);
+    float strength = smoothstep(0, 1, u_time);
     
     float time = u_time;
 

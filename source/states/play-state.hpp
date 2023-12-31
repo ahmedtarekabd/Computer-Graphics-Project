@@ -88,7 +88,7 @@ class Playstate : public our::State
         }
         // lightingSystem.update();
 
-        // When colloision happens, we want to start the animation
+        // // When colloision happens, we want to start the animation
         // if (collision)
         //     animationDuration = 1.0f;
 
@@ -100,7 +100,7 @@ class Playstate : public our::State
         else if (animationDuration > 0.0f)
             animationDuration -= (float)deltaTime;
 
-        // std::cout << "animationDuration = " << animationDuration << "delta time = " << deltaTime << std::endl;
+        std::cout << "animationDuration = " << animationDuration << "delta time = " << deltaTime << std::endl;
         // while (true)
         //     ;
 
@@ -111,6 +111,11 @@ class Playstate : public our::State
         {
             // If the escape  key is pressed in this frame, go to the play state
             getApp()->changeState("menu");
+        }
+        if (keyboard.justPressed(GLFW_KEY_R))
+        {
+            // If the R key is pressed in this frame, apply post processing
+            animationDuration += 1.0f;
         }
     }
 
