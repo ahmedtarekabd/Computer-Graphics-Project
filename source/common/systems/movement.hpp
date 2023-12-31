@@ -44,7 +44,7 @@ namespace our
                         auto direction = player->localTransform.position - entity->localTransform.position;
                         direction = normalize(direction);
                         direction.y =0;
-                        movement->linearVelocity = direction * 1.1f;
+                        movement->linearVelocity = direction * 1.2f;
 
                         auto directionangle = atan2(direction.x, direction.z);
 

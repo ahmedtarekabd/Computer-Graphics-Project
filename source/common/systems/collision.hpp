@@ -93,6 +93,8 @@ namespace our
                     /// HENA hanro7 ll lose state
                     GameController::setState("lose");
                     app->changeState("exit");
+                    app->getSoundEngine()->stopAllSounds();
+                    app->getSoundEngine()->play2D("assets/audio/lose.mp3", true);
                 }
             }
 
@@ -101,6 +103,8 @@ namespace our
 
             if (app->getKeyboard().isPressed(GLFW_KEY_R))
             {
+                app->getSoundEngine()->stopAllSounds();
+                app->getSoundEngine()->play2D("assets/audio/shotgun.mp3", false);
                 for (int j = 0; j < monsters.size(); j++)
                 {
                     m = monsters[j];
@@ -112,6 +116,7 @@ namespace our
                     glm::vec4 Poc = Voc * glm::dot(glm::normalize(Voc), targetdirection);
                     float d = ::sqrtf(glm::dot(Voc, Voc) - glm::dot(Poc, Poc));
                     cout << d;
+                    app->getSoundEngine()->play2D("assets/audio/play2.mp3", true);
                     if (d < 1)
                     {
                         auto it = monsters.begin() + j;
@@ -124,6 +129,8 @@ namespace our
                             cout << "win";
                             GameController::setState("win");
                             app->changeState("exit");
+                            app->getSoundEngine()->stopAllSounds();
+                            app->getSoundEngine()->play2D("assets/audio/win.mp3", true);
                         }
                     }
                 }

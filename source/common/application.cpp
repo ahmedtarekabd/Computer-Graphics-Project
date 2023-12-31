@@ -11,6 +11,15 @@
 #include <filesystem>
 
 #include <flags/flags.h>
+// #include <thread>
+
+// #ifdef _WIN32
+// #include <windows.h>
+// #include <Mmsystem.h>
+// #include <mciapi.h>
+// // these two headers are already included in the <Windows.h> header
+// #pragma comment(lib, "Winmm.lib")
+// #endif
 
 // Include the Dear ImGui implementation headers
 #define IMGUI_IMPL_OPENGL_LOADER_GLAD2
@@ -179,6 +188,11 @@ our::WindowConfiguration our::Application::getWindowConfiguration()
 // if run_for_frames == 0, the application runs indefinitely till manually closed.
 int our::Application::run(int run_for_frames)
 {
+    if (!this->playing)
+    {
+        SoundEngine->play2D("assets/audio/menu.mp3", true);
+        this->playing = true;
+    }
 
     // Set the function to call when an error occurs.
     glfwSetErrorCallback(glfw_error_callback);

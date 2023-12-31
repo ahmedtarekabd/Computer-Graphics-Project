@@ -18,7 +18,7 @@ namespace our
 
         // For Inital 
         std::unordered_set<Entity *> entitiesNotRendered; // These are the entities held by this world but not rendered yet
-
+        int i=1;
     public:
         World() = default;
 
@@ -79,7 +79,7 @@ namespace our
             MovementComponent *mcomp = nullptr;
             CollisionComponent *collidecomp = nullptr;
             
-            newentity->localTransform.position=glm::vec3(40,-1,-1);
+            newentity->localTransform.position=glm::vec3(i*40,-1,-1);
             newentity->localTransform.rotation=glm::vec3(0,-90,0);
             newentity->localTransform.scale=glm::vec3(0.22,0.22,0.22);
             component=newentity->addComponent<MeshRendererComponent>();
@@ -90,7 +90,8 @@ namespace our
             collidecomp=newentity->addComponent<CollisionComponent>();
             collidecomp->CollisionRadius=1;
             newentity->name="monster";
-            entities.insert(newentity);  
+            entities.insert(newentity); 
+            i *= -1; 
             return newentity;
         }
 
