@@ -174,6 +174,7 @@ namespace our
         albedo_tint = data.value("albedo_tint", glm::vec3(1.0f));
         specular_tint = data.value("specular_tint", glm::vec3(1.0f));
         emissive_tint = data.value("emissive_tint", glm::vec3(1.0f));
+        roughness_range = data.value("roughness_range", glm::vec3(1.0f));
 
         if (!albedo_map)
             albedo_map = texture_utils::textureColor(data.value("albedo_tint", glm::vec4(1.0f)));
